@@ -1,0 +1,1127 @@
+Modelo,Arquivo,Tempo_Seg,Total_Smells,Bloaters,Object-Orientation Abusers,Change Preventers,Dispensables,Couplers,Outros,Analise_Raw
+mistral,pipes/data-table/next.config.ts,54.66,3,0,0,0,1,0,2," - Smell Name: Duplicated Code
+  Location: Lines 4-6 and Line 9
+  Explanation: The same `nextConfig` object is assigned multiple times, which violates the DRY (Don't Repeat Yourself) principle. This can lead to maintenance issues if one assignment needs to be updated.
+  Refactoring: Assign the `nextConfig` object once and return it from the function or use a constant at the top level.
+
+- Smell Name: Empty Block
+  Location: Lines 7-8 (webpack function)
+  Explanation: The webpack function receives a configuration object but does not modify it, which is an empty block. This can be confusing to readers and should be refactored for clarity.
+  Refactoring: Remove the webpack function if it's not being used or modify it to perform some useful operation on the config object.
+
+- Smell Name: Magic Number
+  Location: Line 10 (devIndicators object)
+  Explanation: The `buildActivity` and `appIsrStatus` properties are boolean values that are hardcoded as true/false, which can be confusing to readers. It would be better to use named constants or comments for clarity.
+  Refactoring: Define named constants for the boolean values or add comments explaining their purpose.
+
+After refactoring:
+
+```javascript
+import type { NextConfig } from ""next"";
+
+const BUILD_ACTIVITY = false;
+const APP_ISR_STATUS = false;
+const nextConfig: NextConfig = {
+  transpilePackages: [""@screenpipe/js""],
+};
+
+nextConfig.devIndicators = {
+  buildActivity: BUILD_ACTIVITY,
+  appIsrStatus: APP_ISR_STATUS,
+};
+
+export default nextConfig;
+```
+
+Or if you prefer to use named constants:
+
+```javascript
+import type { NextConfig } from ""next"";
+
+const NO_BUILD_ACTIVITY = false;
+const NO_APP_ISR_STATUS = false;
+const nextConfig: NextConfig = {
+  transpilePackages: [""@screenpipe/js""],
+};
+
+nextConfig.devIndicators = {
+  buildActivity: NO_BUILD_ACTIVITY,
+  appIsrStatus: NO_APP_ISR_STATUS,
+};
+
+export default nextConfig;
+```"
+mistral,pipes/data-table/src/app/api/settings/route.ts,48.92,6,1,0,0,1,0,4," - Smell Name: Duplicated Code
+  Location: Multiple instances of reading environment variables and handling missing values
+  Explanation: The code reads the same environment variables (HOME, SCREENPIPE_DIR) multiple times, which increases complexity and maintenance effort.
+  Refactoring: Extract a helper function to read and handle missing environment variables.
+
+- Smell Name: Long Function
+  Location: GET() and PUT() functions
+  Explanation: Both functions are long and complex, making them hard to understand and maintain.
+  Refactoring: Break down the functions into smaller, more manageable methods or modules.
+
+- Smell Name: Lack of Error Handling
+  Location: Multiple places in both GET() and PUT() functions
+  Explanation: The code does not provide detailed error messages for users, making it hard to debug issues.
+  Refactoring: Add more specific error messages and consider using a dedicated error handling library.
+
+- Smell Name: Magic Strings
+  Location: Hardcoded strings like ""data-table"", ""pipes""
+  Explanation: Using hardcoded strings makes the code less flexible and harder to maintain, as changes require manual updates.
+  Refactoring: Use constants or configuration files for these values.
+
+- Smell Name: Unused Import
+  Location: NextResponse
+  Explanation: The imported module (NextResponse) is only used within the scope of the async functions provided, making it a potential candidate for removal.
+  Refactoring: If the codebase does not use NextResponse outside these functions, consider removing this import.
+
+- Smell Name: Unclear Naming
+  Location: Variable names like settingsManager, body, rawSettings, persistedSettings
+  Explanation: The variable names do not clearly indicate their purpose or type, making the code harder to understand.
+  Refactoring: Rename variables with more descriptive and self-explanatory names.
+
+Overall, the code has several opportunities for refactoring to improve readability, maintainability, and flexibility."
+mistral,pipes/data-table/src/app/layout.tsx,8.23,0,0,0,0,0,0,0," ✅ No Code Smells detected.
+
+The provided code follows clean coding practices and does not exhibit any of the common code smells listed in the Refactoring Guru catalog for the given code snippet. The code is well-structured, organized, and easy to understand. Good job!"
+mistral,pipes/data-table/src/app/page.tsx,32.75,4,0,0,0,2,0,2," - Smell Name: Duplicate Code
+  Location: Not applicable (Functional duplicate)
+  Explanation: The function `SearchPage` only returns a JSX element that is very similar to the one returned by the `DataPage` component. This could potentially lead to maintenance issues if changes need to be made in both places.
+  Refactoring: Consider extracting the common JSX structure into a separate constant or function and pass any necessary props to it from both components.
+
+- Smell Name: Lazy Import
+  Location: Line 2
+  Explanation: The import statement starts with ""//"" which indicates a lazy load, but there's no tree shaking in Next.js by default. This could potentially lead to unnecessary bundle size and performance issues.
+  Refactoring: Remove the ""//"" and ensure that unused components are removed from the build process.
+
+- Smell Name: Hardcoded Strings
+  Location: Line 4
+  Explanation: The string ""where pixels become magic"" is hardcoded in the JSX, which makes it difficult to localize or change easily.
+  Refactoring: Consider using a translation library like i18next and move the strings to a separate file for easier management.
+
+- Smell Name: Missing Comments
+  Location: Not applicable (No comments found)
+  Explanation: Lack of comments can make the code harder to understand, especially for new developers or when revisiting the code after a long time.
+  Refactoring: Add comments explaining the purpose and behavior of functions, classes, and complex sections of code."
+mistral,pipes/data-table/src/components/ai-presets-selector.tsx,106.42,8,3,0,0,1,0,4," - Smell Name: Long Function (LF)
+  Location: AIProviderConfig function
+  Explanation: The function is excessively long and complex, making it difficult to understand its purpose and behavior at a glance. This violates the principle of separating concerns and makes the code harder to maintain and test.
+  Refactoring: Consider breaking down the function into smaller, more manageable functions or components that focus on specific tasks.
+
+- Smell Name: Large Class (LC)
+  Location: Not applicable (it's a JavaScript file with multiple exported components)
+  Explanation: The file contains multiple unrelated components, making it difficult to understand the relationships between them and increasing the overall complexity of the codebase. This violates the principle of encapsulation and makes the code harder to maintain and test.
+  Refactoring: Consider organizing the components into smaller, more focused modules or files.
+
+- Smell Name: Duplicate Code (DC)
+  Location: The `DEFAULT_PROMPT` variable is defined multiple times for different preset types.
+  Explanation: Duplicating code increases the maintenance effort and introduces potential inconsistencies between copies. This violates the principle of DRY (Don't Repeat Yourself).
+  Refactoring: Consider moving the `DEFAULT_PROMPT` variable to a separate file or function and importing it where needed to avoid duplication.
+
+- Smell Name: Long Parameter List (LPL)
+  Location: AIProviderConfig props
+  Explanation: The function accepts a large number of props, making it difficult to understand which ones are required and which ones are optional. This violates the principle of minimizing the number of arguments passed to functions.
+  Refactoring: Consider breaking down the function into smaller functions with fewer props or using an object for passing multiple related props.
+
+- Smell Name: Magic Numbers (MN)
+  Location: Several places, e.g., `maxContextChars` in various types and default values
+  Explanation: Magic numbers are hardcoded numerical constants that do not have clear meaning or context within the code. This makes the code harder to understand and maintain.
+  Refactoring: Consider renaming magic numbers to more descriptive variable names or defining them as constants at the top of the file.
+
+- Smell Name: Nested Conditional Statements (NCS)
+  Location: Several places, e.g., `selectedProvider` state update in AIProviderConfig function
+  Explanation: Nested conditional statements make the code harder to read and understand, as they require the reader to follow multiple nested if-else blocks. This violates the principle of keeping code simple and easy to understand.
+  Refactoring: Consider refactoring the nested conditions into separate functions or using a switch statement to improve readability.
+
+- Smell Name: Unused Variable (UV)
+  Location: Not found in the provided code
+  Explanation: If not present, there are no unused variables in the provided code.
+
+- Smell Name: No Code Smells detected.
+  Location: N/A
+  Explanation: The provided code does not contain any of the identified code smells from the Refactoring Guru catalog."
+mistral,pipes/data-table/src/components/audio-transcriptions-table.tsx,103.06,6,2,0,0,2,0,2," - Smell Name: Long Function (or Method)
+  Location: Multiple functions in this code are long and could be broken down into smaller, more manageable functions. This violates clean code as it makes the code harder to read, understand, and maintain.
+
+  Explanation: Functions like `AudioTranscriptionsTable`, `CellContent`, and some of the helper functions (e.g., `flexRender`, `getCoreRowModel`, etc.) are quite long. Long functions can make it difficult to follow the logic, especially when they perform multiple unrelated tasks.
+
+  Refactoring: Break down these functions into smaller, more focused ones. Each function should ideally perform a single task or responsibility.
+
+- Smell Name: Duplicated Code
+  Location: Multiple instances of import statements for the same libraries (e.g., `lucide-react`, `@/components/ui/button`, etc.)
+
+  Explanation: Having multiple identical import statements can lead to maintenance issues, as any changes to the library or component need to be made in multiple places. This violates clean code principles by increasing the potential for errors and making the code harder to manage.
+
+  Refactoring: Consolidate these imports into a single import statement at the top of the file.
+
+- Smell Name: Lack of Modularity
+  Location: The code seems to mix presentation (UI components) with business logic, which violates separation of concerns and makes the code harder to maintain and test.
+
+  Explanation: For example, the `AudioTranscriptionsTable` function contains both UI components (like `Button`, `DropdownMenu`, etc.) and business logic (manipulating the data and rendering it). This mixing can make the code harder to understand, test, and reuse.
+
+  Refactoring: Move the presentation logic into separate UI component files, leaving the main function focused on managing and manipulating the data.
+
+- Smell Name: Large Class (or Module)
+  Location: The entire code file represents a large class or module that performs multiple unrelated tasks. This violates clean code principles by making the code harder to understand, test, and maintain.
+
+  Explanation: The code file contains both UI components (like `Button`, `DropdownMenu`, etc.) and business logic (manipulating the data and rendering it). This mixing can make the code harder to understand, test, and reuse.
+
+  Refactoring: Split the code into smaller, more focused modules or classes, each responsible for a specific task or responsibility.
+
+- Smell Name: Magic Numbers
+  Location: There are several hardcoded values (e.g., `500px`, `8vh`, etc.) throughout the code that could be better represented as constants.
+
+  Explanation: Hardcoding values can make the code harder to maintain, as any changes to these values require updates in multiple places. This violates clean code principles by increasing the potential for errors and making the code harder to manage.
+
+  Refactoring: Create a separate file for constants and move these hardcoded values there. Then, replace the hardcoded values with references to the corresponding constants.
+
+- Smell Name: Lack of Comments
+  Location: There are no comments in the provided code, making it harder for others to understand the purpose and logic of the code.
+
+  Explanation: Lack of comments can make the code harder to understand, especially when dealing with complex or non-obvious logic. This violates clean code principles by increasing the potential for misunderstandings and errors.
+
+  Refactoring: Add comments explaining the purpose and logic of each function, as well as any complex sections of the code. This will make it easier for others to understand and maintain the code."
+mistral,pipes/data-table/src/components/database-sidebar.tsx,72.98,6,1,0,0,1,0,4," - Smell Name: Duplicated Code
+  Location: Lines 8-11, 14-17, 19-22, and 25-28
+  Explanation: The same icon component is being used multiple times, which violates the DRY (Don't Repeat Yourself) principle. This can lead to maintenance issues if the icon needs to be updated in multiple places.
+  Refactoring: Create a separate function or component for the icon and reuse it where needed.
+
+- Smell Name: Magic Number
+  Location: Line 13 (isMacOS condition)
+  Explanation: The value ""0"" is used as a threshold to check if the platform is MacOS, which can be confusing and hard to maintain.
+  Refactoring: Define a constant for the threshold value and use it instead.
+
+- Smell Name: Hardcoded String
+  Location: Line 15 (filtering table based on OS)
+  Explanation: The table name ""ui_monitoring"" is hardcoded in the condition, making it difficult to modify or extend the list of tables dynamically.
+  Refactoring: Consider using a configuration file or a more flexible approach to manage the list of tables.
+
+- Smell Name: Large Class/Function
+  Location: DatabaseSidebar function
+  Explanation: The DatabaseSidebar function is quite large, which can make it harder to understand and maintain.
+  Refactoring: Consider breaking down the function into smaller, more manageable functions or components.
+
+- Smell Name: Lazy Variable
+  Location: Line 6 (allTables constant)
+  Explanation: The allTables constant is defined but not used until the useEffect hook runs, which can lead to unexpected behavior if the component is rendered before the data is available.
+  Refactoring: Initialize allTables with an empty array or a default value and update it when the data is ready.
+
+- Smell Name: Unused Import
+  Location: Line 3 (import { JSX, useEffect, useState } from ""react"")
+  Explanation: The imported modules JSX, useEffect, and useState are not used in the provided code.
+  Refactoring: Remove the unused imports to keep the code clean and focused.
+
+After refactoring, the code would look like this:
+
+```jsx
+// ... (import statements)
+
+const TABLES = [
+  { name: ""ui_monitoring"", visibleOn: [""macos""] },
+  // ... other tables
+];
+
+function useVisibleTables(currentTable: string, os: string) {
+  const [tables, setTables] = useState<TableItem[]>([]);
+
+  useEffect(() => {
+    const filteredTables = TABLES.filter((table) =>
+      table.visibleOn.includes(os) || (table.name !== ""ui_monitoring"" && os !== ""macos"")
+    );
+    setTables(filteredTables);
+  }, [os]);
+
+  return tables;
+}
+
+// ... (DatabaseSidebar function with updated useEffect and state)
+```"
+mistral,pipes/data-table/src/components/markdown.tsx,36.84,4,0,0,0,1,0,3," - Smell Name: Duplicated Code
+  Location: Lines 4-5 and 10-11
+  Explanation: The same function ReactMarkdown is being imported twice and used twice with the exact same arguments, which violates the DRY (Don't Repeat Yourself) principle. This makes the code harder to maintain and increases the risk of inconsistencies.
+  Refactoring: Combine the imports and uses of ReactMarkdown into a single line.
+
+- Smell Name: Lazy Evaluation
+  Location: Line 9
+  Explanation: The memo function is used on ReactMarkdown, which means that the component will only re-render when its props change. However, since ReactMarkdown doesn't accept any props other than children and className, this lazy evaluation might not provide any performance benefits.
+  Refactoring: Consider removing the memo wrapper if it doesn't improve performance in this specific case.
+
+- Smell Name: Unused Import
+  Location: Line 2
+  Explanation: The 'memo' function from 'react' is imported but not used anywhere in the provided code. This can make the code harder to understand and maintain.
+  Refactoring: Remove the unused import of 'memo'.
+
+- Smell Name: Incomplete Object Types
+  Location: Lines 8, 9
+  Explanation: The types of props for MemoizedReactMarkdown are not specified, which can lead to potential type errors and makes the code harder to understand.
+  Refactoring: Add proper type annotations for the props of MemoizedReactMarkdown.
+
+Output format (if NO smells found):
+""✅ No Code Smells detected.""
+
+However, since there are several code smells in the provided code, I will not say that no smells were detected."
+mistral,pipes/data-table/src/components/ocr-data-table.tsx,108.02,7,1,0,0,2,0,4," - Smell Name: Long Line of Code (LLOC)
+  Location: Lines 1-8 (entire import section)
+  Explanation: The imports section contains multiple lines which can make the code harder to read and understand at a glance. It violates the DRY (Don't Repeat Yourself) principle as some libraries are imported more than once.
+  Refactoring: Consider consolidating the imports into separate sections or using named imports where possible.
+
+- Smell Name: Large Class/Function (LCOM)
+  Location: The entire code file (OcrText, CellContent, columns array, OcrDataTable function)
+  Explanation: The code file contains multiple classes and functions which can make it difficult to understand the overall structure and maintainability. It violates the Single Responsibility Principle as some components seem to have more than one responsibility.
+  Refactoring: Consider breaking down the code into smaller, more manageable modules or functions, each with a single responsibility.
+
+- Smell Name: Magic Strings
+  Location: Lines 20, 31, 42, 53, 64, 75, 86, 97, 108, 119 (header and cell functions)
+  Explanation: Hardcoded strings are used throughout the code which can make it harder to maintain and understand. It violates the DRY principle as changes to these strings would require multiple updates across the codebase.
+  Refactoring: Consider using constants or enums for these hardcoded strings to improve readability and maintainability.
+
+- Smell Name: Nested Functions
+  Location: Lines 36-48 (columns array)
+  Explanation: The columns array contains nested functions which can make it harder to understand the overall structure and maintainability. It violates the Single Responsibility Principle as these functions seem to have more than one responsibility.
+  Refactoring: Consider extracting these nested functions into separate functions or modules, each with a single responsibility.
+
+- Smell Name: Lack of Comments
+  Location: Entire code file
+  Explanation: The code lacks comments which can make it harder for others to understand the purpose and functionality of the code. It violates the readability principle as it requires extensive knowledge of the context to understand the code.
+  Refactoring: Consider adding comments to explain the purpose, functionality, and any complex parts of the code.
+
+- Smell Name: Lack of Type Annotations
+  Location: Entire code file
+  Explanation: The code lacks type annotations which can make it harder for TypeScript to provide type safety and autocompletion features. It violates the maintainability principle as it requires extensive knowledge of the context to understand the types of variables and functions.
+  Refactoring: Consider adding type annotations to improve type safety, autocompletion, and maintainability.
+
+- Smell Name: Duplicate Code
+  Location: Lines 31, 42, 53, 64, 75, 86, 97, 108, 119 (header and cell functions)
+  Explanation: The same code for rendering the cell content is repeated multiple times which violates the DRY principle. It can make the code harder to maintain and understand as changes would require updates in multiple places.
+  Refactoring: Consider extracting the common cell rendering logic into a separate function or component to improve readability, maintainability, and reduce duplication.
+
+Overall, there are several Code Smells present in the provided code which can make it harder to understand, maintain, and extend. It is recommended to refactor the code to follow clean coding principles such as Single Responsibility Principle, DRY principle, and proper use of comments and type annotations."
+mistral,pipes/data-table/src/components/page.tsx,58.2,7,1,0,0,1,0,5," - Smell Name: Long Function
+  Location: DataPage function
+  Explanation: The function `DataPage` is quite long and complex, which makes it hard to understand and maintain.
+  Refactoring: Consider breaking the function into smaller, more manageable functions or components.
+
+- Smell Name: Duplicated Code
+  Location: renderTable switch case for ""ui_monitoring""
+  Explanation: The conditional logic based on the user agent is duplicated in multiple places, which violates DRY (Don't Repeat Yourself) principle.
+  Refactoring: Move the user agent check to a separate function and pass it as an argument to the render functions.
+
+- Smell Name: Magic Number
+  Location: Line 13 (case ""ui_monitoring"")
+  Explanation: The number `20` is used without any explanation or context, making it hard for others to understand its purpose.
+  Refactoring: Consider renaming the case to something more descriptive and move the constant to a separate variable with a meaningful name.
+
+- Smell Name: Unused Import
+  Location: DatabaseSidebar import
+  Explanation: The imported component `DatabaseSidebar` is not used in the provided code, which may lead to confusion or errors if it's modified later.
+  Refactoring: Remove the unused import or ensure that it's used somewhere in the code.
+
+- Smell Name: Hardcoded Path
+  Location: Not directly visible (potentially in the imported components)
+  Explanation: The paths to the component files are hardcoded, which makes them less flexible and harder to manage if the project structure changes.
+  Refactoring: Consider using relative imports or a more robust module system that allows for easier path management.
+
+- Smell Name: Lack of Error Handling
+  Location: Not directly visible (potentially in the imported components)
+  Explanation: There is no error handling in the provided code, which means any errors that occur during runtime will likely cause the application to crash without any indication of what went wrong.
+  Refactoring: Add appropriate error handling and logging mechanisms to help diagnose issues when they arise.
+
+- Smell Name: Large Switch Statement
+  Location: renderTable function
+  Explanation: The switch statement in `renderTable` is quite large, which can make it hard to maintain and extend as the number of cases grows.
+  Refactoring: Consider using a mapping object or a more sophisticated solution like a factory pattern to manage the rendering logic.
+
+Overall, there are several code smells present in the provided code. It would be beneficial to refactor the code to improve its maintainability and readability."
+mistral,pipes/data-table/src/components/search-command.tsx,106.84,9,2,1,0,5,0,1," 1. **Duplicated Code** (Lines 4-7)
+   - Location: Multiple
+   - Explanation: The import statements are duplicated across multiple files, which violates the DRY (Don't Repeat Yourself) principle.
+   - Refactoring: Centralize these imports in a common file and import them where needed.
+
+2. **Long Function** (Lines 10-47)
+   - Location: SearchCommand() function
+   - Explanation: The function is too long, making it difficult to understand and maintain. This violates the Single Responsibility Principle.
+   - Refactoring: Break down the function into smaller, more manageable functions based on their responsibilities.
+
+3. **Large Switch Statement** (Lines 24-38)
+   - Location: handleGenerateSql() function
+   - Explanation: The switch statement is large and complex, which makes it hard to understand and maintain. This violates the Single Responsibility Principle.
+   - Refactoring: Consider using a more modern approach like object-oriented programming or using a mapping function to handle different cases.
+
+4. **Magic Strings** (Lines 28, 30, 32)
+   - Location: handleGenerateSql() function
+   - Explanation: The use of hardcoded strings (e.g., ""system"", ""user"") without proper naming or encapsulation violates the DRY principle and makes the code harder to understand and maintain.
+   - Refactoring: Consider creating constants or enums for these values, or encapsulating them within objects.
+
+5. **Hardcoded Values** (Lines 34-36)
+   - Location: handleGenerateSql() function
+   - Explanation: The hardcoded values (e.g., 100) make the code less flexible and harder to maintain, as changes require direct modifications.
+   - Refactoring: Consider using configuration files or environment variables for these values, so they can be easily changed without modifying the code.
+
+6. **Lack of Error Handling** (Lines 41-43)
+   - Location: handleGenerateSql() function
+   - Explanation: The error handling is minimal and does not provide useful information about the error that occurred, which makes it hard to debug and maintain.
+   - Refactoring: Consider using a more robust error handling approach, such as providing detailed error messages and logging errors for further analysis.
+
+7. **Complex Conditional** (Lines 41-43)
+   - Location: handleGenerateSql() function
+   - Explanation: The complex conditional statement makes the code harder to understand and maintain, violating the Single Responsibility Principle.
+   - Refactoring: Consider breaking down the complex condition into smaller, more manageable conditions or functions.
+
+8. **Unused Variables** (Lines 45-46)
+   - Location: handleGenerateSql() function
+   - Explanation: The variables aiPreset and openai are not used after being assigned, which violates the DRY principle and makes the code harder to understand and maintain.
+   - Refactoring: Remove these unused variables or ensure they are used appropriately.
+
+9. **Code Comments** (Lines 1-3)
+   - Location: Comment block at the beginning of the file
+   - Explanation: The comment block is not necessary, as it does not provide any useful information about the code that follows. This can be removed to improve readability.
+   - Refactoring: Remove the comment block if it does not serve a purpose.
+
+Overall, there are several Code Smells in the provided code. It would benefit from refactoring to improve maintainability and readability."
+mistral,pipes/data-table/src/components/sql-autocomplete-input.tsx,90.91,10,1,0,0,2,0,7," - Smell Name: Long Parameter List
+  Location: SqlAutocompleteInput function parameters
+  Explanation: The function has more than 5 parameters which can make it hard to understand and remember all of them.
+  Refactoring: Consider breaking down the function into smaller functions with fewer parameters or using an object as a parameter.
+
+- Smell Name: Duplicate Code
+  Location: useEffect hook for handling click outside event
+  Explanation: The same code block is repeated twice in the useEffect hook, which can lead to maintenance issues if changes are needed.
+  Refactoring: Extract the common code into a separate function and call it from both places.
+
+- Smell Name: Large Method (Function)
+  Location: SqlAutocompleteInput function body
+  Explanation: The function is quite long, making it hard to understand its purpose at a glance.
+  Refactoring: Consider breaking down the function into smaller, more manageable functions or methods.
+
+- Smell Name: Lazy or Missing Comments
+  Location: Throughout the code
+  Explanation: There are no comments in the code to explain what each part does, making it harder for others to understand the codebase.
+  Refactoring: Add clear and concise comments explaining the purpose of each section of the code.
+
+- Smell Name: Magic Number
+  Location: The number of items shown in Command.List (60)
+  Explanation: A hardcoded number is used without any explanation or justification, making it harder to understand why that specific value was chosen.
+  Refactoring: Consider using a constant or variable for this value and document its purpose.
+
+- Smell Name: Nested Conditional Statements
+  Location: The if statement inside the Command.List component
+  Explanation: There are nested conditional statements which can make the code harder to read and maintain.
+  Refactoring: Consider refactoring the logic to avoid nesting or breaking it down into smaller functions.
+
+- Smell Name: Long Variable Names
+  Location: isLoading, open, inputValue, items, commandRef, handleSelect, handleInputChange, handleClearInput, handleClickOutside
+  Explanation: The variable names are quite long which can make the code harder to read and understand.
+  Refactoring: Consider using shorter, more descriptive variable names while still maintaining clarity.
+
+- Smell Name: Unused Variable
+  Location: commandRef inside handleClickOutside useEffect
+  Explanation: The commandRef variable is declared but not used within the handleClickOutside useEffect function.
+  Refactoring: Remove the unused variable or ensure it's being used as intended.
+
+- Smell Name: Unclear Naming
+  Location: Command, Command.List, Command.Input, Command.Item, Command.Loading
+  Explanation: The names do not clearly indicate their purpose, making it harder to understand the code at a glance.
+  Refactoring: Consider renaming these components to more descriptive names that better reflect their functionality.
+
+- Smell Name: No Error Handling
+  Location: Throughout the code
+  Explanation: There is no error handling in the code, which can lead to unexpected behavior when errors occur.
+  Refactoring: Add appropriate error handling for potential issues such as network errors or invalid data.
+
+Overall, there are several Code Smells present in the provided code. It would be beneficial to refactor the code to improve readability, maintainability, and robustness."
+mistral,pipes/data-table/src/components/video-chunks-table.tsx,89.15,7,1,1,0,0,0,5," - Smell Name: Long Function (LF)
+  Location: VideoChunksTable function
+  Explanation: The function is quite long and complex, which makes it hard to understand and maintain. It performs multiple responsibilities such as fetching data, handling filters, sorting, and rendering the table.
+  Refactoring: Break down the function into smaller, more manageable functions or components that handle specific tasks. For example, create separate functions for fetching data, handling filters, and rendering the table.
+
+- Smell Name: Magic Strings (MS)
+  Location: Multiple occurrences throughout the code (e.g., ""localhost"", ""/raw_sql"")
+  Explanation: Hardcoded strings are not easily maintainable or reusable. They can lead to errors if the values need to be changed in multiple places.
+  Refactoring: Create constants for these hardcoded strings and use them throughout the code.
+
+- Smell Name: Lack of Error Handling (LEH)
+  Location: fetchData function
+  Explanation: The function does not handle errors that might occur during the data fetching process. This can lead to unexpected behavior or crashes in the application.
+  Refactoring: Add proper error handling to the fetchData function, such as catching and logging errors, or displaying user-friendly error messages.
+
+- Smell Name: Large Switch Statements (LSS)
+  Location: The rendering of columns in the VideoChunksTable function
+  Explanation: The large switch statement for rendering different column types makes the code hard to read and maintain. It also violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Consider using a more flexible approach, such as mapping over the columns array and conditionally rendering each column based on its properties or type.
+
+- Smell Name: Unused Variables (UV)
+  Location: Multiple variables throughout the code that are declared but not used (e.g., `totalRows` in the fetchData function)
+  Explanation: Unused variables can make the code harder to understand and maintain, as well as potentially causing errors if they are accidentally modified or referenced elsewhere.
+  Refactoring: Remove unused variables from the code.
+
+- Smell Name: Hardcoded Values (HV)
+  Location: The pageSize and pageIndex state variables are hardcoded with specific values.
+  Explanation: Hardcoding these values makes it difficult to adjust the pagination settings in the future, as they would need to be changed in multiple places.
+  Refactoring: Consider using constants or configuration files for these values, so they can be easily adjusted without modifying the code.
+
+- Smell Name: Lack of Type Safety (LTS)
+  Location: The use of `any` type throughout the code
+  Explanation: Using `any` type can lead to runtime errors and makes it harder to catch type-related issues during development.
+  Refactoring: Add proper type annotations to the code, using TypeScript or a similar tool, to improve type safety.
+
+Overall, there are several Code Smells in the provided code that could be improved for better maintainability, readability, and type safety."
+mistral,pipes/data-table/src/lib/actions/get-screenpipe-app-settings.ts,69.26,7,2,0,0,2,0,3," - Smell Name: God Object (or Large Class)
+  - Location: Entire file
+  - Explanation: The class has too many responsibilities, specifically it handles both getting and updating screenpipe app settings which violates the Single Responsibility Principle.
+  - Refactoring: Split the class into two separate classes, one for handling retrieval of settings and another for updating settings.
+
+- Smell Name: Lazy Class (or Empty Interface)
+  - Location: Import type { Settings as ScreenpipeAppSettings } from ""@screenpipe/js""
+  - Explanation: The imported type is not used within the class, making it a lazy or empty interface.
+  - Refactoring: Remove the unused import if it's not needed in the class.
+
+- Smell Name: Missing Type Annotations (or Untyped Variables)
+  - Location: newSettings: Partial<ScreenpipeAppSettings>
+  - Explanation: The function parameter does not have a type annotation, making it untyped and potentially leading to errors.
+  - Refactoring: Add the appropriate type annotation for the function parameter.
+
+- Smell Name: Unused Import (or Dead Code)
+  - Location: import { pipe } from ""@screenpipe/js"";
+    - If this import is not used within the file, it can be removed to avoid clutter and potential confusion.
+    - However, without more context, it's hard to confirm if it's actually unused.
+  - Refactoring: Verify if the import is needed and remove it if it's not.
+
+- Smell Name: Magic Number (or Hardcoded Values)
+  - Location: Not found in the provided code.
+    - This smell usually appears when literal values are used without proper naming or explanation, making the code harder to understand and maintain.
+    - Since no such values were found in the provided code, there's no smell detected for this category.
+
+Output format (based on the findings):
+- Smell Name: God Object
+  - Location: Entire file
+  - Explanation: The class has too many responsibilities...
+  - Refactoring: Split the class into two separate classes, one for handling retrieval of settings and another for updating settings.
+
+- Smell Name: Lazy Class (or Empty Interface)
+  - Location: Import type { Settings as ScreenpipeAppSettings } from ""@screenpipe/js""
+  - Explanation: The imported type is not used within the class...
+  - Refactoring: Remove the unused import if it's not needed in the class.
+
+- Smell Name: Missing Type Annotations
+  - Location: newSettings: Partial<ScreenpipeAppSettings>
+  - Explanation: The function parameter does not have a type annotation...
+  - Refactoring: Add the appropriate type annotation for the function parameter.
+
+- Smell Name: Unused Import (or Dead Code)
+  - Location: import { pipe } from ""@screenpipe/js"";
+    - If this import is not used within the file, it can be removed to avoid clutter and potential confusion...
+    - However, without more context, it's hard to confirm if it's actually unused.
+  - Refactoring: Verify if the import is needed and remove it if it's not."
+mistral,pipes/data-table/src/lib/actions/video-actions.ts,40.34,5,1,0,0,1,0,3," - Smell Name: Duplicated Code
+  Location: Lines 8-10 and Lines 24-26
+  Explanation: The same function `resolve` and the same function `readFile` are imported twice, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Import these functions once at the top of the file.
+
+- Smell Name: Long Function
+  Location: Function getMediaFile
+  Explanation: The function `getMediaFile` is quite long and could be broken down into smaller, more manageable functions for better readability and maintainability.
+  Refactoring: Consider breaking down the function into smaller functions such as `resolveFilePath`, `readFileBuffer`, `convertToBase64`, and `determineMimeType`.
+
+- Smell Name: Magic String
+  Location: Lines 15, 20, 23, 27, 31, 35
+  Explanation: Hardcoded file extensions and audio checks are magic strings that make the code less flexible and harder to maintain.
+  Refactoring: Consider using a configuration object or a function to handle these cases.
+
+- Smell Name: Lack of Error Handling
+  Location: Function getMediaFile (catch block)
+  Explanation: The catch block only logs the error and rethrows it without providing any context or useful information about the error that occurred.
+  Refactoring: Provide more detailed error messages to help with debugging.
+
+- Smell Name: Unused Variable
+  Location: Line 12 (buffer)
+  Explanation: The variable `buffer` is assigned a value but never used after the conversion to base64.
+  Refactoring: Remove the unused variable or use it as intended.
+
+Output format (if NO smells found):
+""✅ No Code Smells detected."""
+mistral,pipes/data-table/src/lib/hooks/use-copy-to-clipboard.tsx,40.93,5,1,0,0,1,0,3," - Smell Name: Long Parameter List [LongParameterList]
+  Location: Line 14 (useCopyToClipboard function)
+  Explanation: The function has more than one parameter, making it harder to understand and maintain.
+  Refactoring: Consider breaking the function into smaller functions with fewer parameters or using an options object.
+
+- Smell Name: Magic Number [MagicNumber]
+  Location: Line 15 (timeout value)
+  Explanation: The number 2000 is used without any explanation, making it hard to understand why this specific value was chosen.
+  Refactoring: Consider renaming the variable or adding a comment explaining its purpose.
+
+- Smell Name: Unused Import [UnusedImport]
+  Location: Line 3 (import * as React from ""react"")
+  Explanation: The imported React module is not used in this file, which can lead to confusion and potential issues.
+  Refactoring: Remove the unused import or find a use for it within the codebase.
+
+- Smell Name: Duplicate Code [DuplicateCode]
+  Location: Line 17 (if (!value)) and Line 20 (if (!navigator.clipboard?.writeText)
+  Explanation: The same check for null or undefined value is repeated, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Move the check to a separate function or variable and reuse it.
+
+- Smell Name: Lack of Error Handling [LackOfErrorHandling]
+  Location: Line 19 (navigator.clipboard.writeText(value).then(() => {...}))
+  Explanation: There is no error handling for the navigator.clipboard.writeText method, which can lead to unhandled exceptions.
+  Refactoring: Add try-catch blocks or promise rejection handlers to handle potential errors.
+
+Output format (if NO smells found):
+""✅ No Code Smells detected.""
+(However, in this case, there are several code smells present.)"
+mistral,pipes/data-table/src/lib/hooks/use-debounce.tsx,41.62,4,1,0,0,1,0,2," - Smell Name: Long Parameter List
+  Location: Line 4 (useDebounce function)
+  Explanation: The function has more than one parameter, making it harder to understand the purpose of each parameter and increasing the chance of mistakes when calling the function.
+  Refactoring: Consider breaking down the function into smaller functions with fewer parameters or using an object as a parameter to group related parameters together.
+
+- Smell Name: Duplicate Code
+  Location: Inside useEffect hook (Lines 7-10)
+  Explanation: The same code is repeated in the useEffect callback and the return function, which violates the DRY (Don't Repeat Yourself) principle and increases the risk of inconsistencies.
+  Refactoring: Move the common logic outside the hooks to a separate variable or function, then call it from both places.
+
+- Smell Name: Lack of Clarity
+  Location: Function name ""useDebounce""
+  Explanation: The function name does not clearly indicate its purpose, making it harder for other developers to understand what the function does at a glance.
+  Refactoring: Consider renaming the function to something more descriptive, such as ""useDebouncedValue"".
+
+- Smell Name: Magic Number
+  Location: Line 5 (delay parameter)
+  Explanation: The value of the delay parameter is hardcoded and not explained anywhere in the code, making it harder for other developers to understand why this specific value was chosen.
+  Refactoring: Consider documenting the purpose of the delay or passing it as a configuration option from outside the component.
+
+Overall, the code has several issues that could be improved for better readability and maintainability. It's always a good practice to follow clean coding principles when writing code.
+
+""🔍 Code Smells detected: 4
+- Long Parameter List (Line 4)
+- Duplicate Code (Lines 7-10)
+- Lack of Clarity (Function name ""useDebounce"")
+- Magic Number (Line 5)"""
+mistral,pipes/data-table/src/lib/hooks/use-health-check.tsx,53.59,6,1,0,0,2,0,3," - Smell Name: Long Function (> 20 lines)
+  Location: useHealthCheck function
+  Explanation: The function is longer than the recommended limit of 20 lines, making it harder to understand and maintain.
+  Refactoring: Break down the function into smaller, more manageable functions or methods.
+
+- Smell Name: Duplicated Code
+  Location: fetchHealth function (inside useEffect and directly)
+  Explanation: The same code block is repeated in two places, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Extract the common code into a separate function and call it from both locations.
+
+- Smell Name: Large Switch Statement or If Statement
+  Location: isHealthChanged function
+  Explanation: The function has a long conditional statement that makes it hard to read and understand.
+  Refactoring: Consider using a helper function for each condition or breaking down the function into smaller functions.
+
+- Smell Name: Lazy or Dead Code
+  Location: console.error line inside the catch block of fetchHealth function
+  Explanation: The console.error line is not being used and can be removed to improve code readability and performance.
+  Refactoring: Remove the unused console.error line.
+
+- Smell Name: Magic Number (Hardcoded values)
+  Location: ""http://localhost:3030/health""
+  Explanation: The URL is hardcoded, making it difficult to change or reuse the code in different contexts.
+  Refactoring: Consider using a constant or configuration file for the URL.
+
+- Smell Name: Unused Import (lodash's debounce)
+  Location: import statement of lodash's debounce function
+  Explanation: The imported debounce function is not being used in the provided code.
+  Refactoring: Remove the unused import to improve code readability and maintainability.
+
+Output format (if NO smells found):
+""✅ No Code Smells detected.""
+However, since there are several potential issues identified above, it would be beneficial to address them for cleaner and more maintainable code."
+mistral,pipes/data-table/src/lib/hooks/use-pipe-settings.tsx,52.75,6,2,0,0,1,0,3," - Smell Name: God Object (Large Class)
+  Location: Entire function `usePipeSettings`
+  Explanation: The function `usePipeSettings` has multiple responsibilities such as managing state, handling side effects with `useEffect`, and providing methods for updating settings and getting presets. This violates the Single Responsibility Principle (SRP).
+  Refactoring: Break down the function into smaller, more focused functions or components that handle specific tasks.
+
+- Smell Name: Long Parameter List
+  Location: `usePipeSettings` function parameter `pipeName: string`
+  Explanation: The function has a single parameter which is a string. While this isn't a major issue in this case, it could become problematic if the function grows and requires more parameters.
+  Refactoring: Consider using an options object or destructuring to make the function signature cleaner.
+
+- Smell Name: Magic Number
+  Location: Multiple places (e.g., `settingsStore.getStore().pipeSettings[pipeName]`)
+  Explanation: The code uses hardcoded keys like `pipeName` and `aiPresetId`, which can make the code harder to understand and maintain.
+  Refactoring: Define constants for these keys or use type annotations to make their meaning clearer.
+
+- Smell Name: Lack of Type Safety (TypeScript)
+  Location: Multiple places (e.g., `settingsStore.getStore().pipeSettings[pipeName]`)
+  Explanation: The code uses the `any` type in some places, which can lead to runtime errors and makes it harder to catch issues during development.
+  Refactoring: Use TypeScript's type system to ensure that variables have appropriate types.
+
+- Smell Name: Unused Variable
+  Location: Not detected (The code provided does not contain any unused variables)
+  Explanation: N/A
+  Refactoring: N/A
+
+- Smell Name: Duplicate Code
+  Location: Not detected (The code provided does not contain any duplicate code)
+  Explanation: N/A
+  Refactoring: N/A
+
+Overall, the code has several opportunities for refactoring to improve its structure and maintainability.
+
+✅ No Code Smells detected in terms of the provided list from Refactoring Guru catalog. However, there are still opportunities for improving the code's organization and type safety."
+mistral,pipes/data-table/src/lib/hooks/use-search-history.tsx,95.52,5,1,0,0,2,0,2," - Smell Name: Long Function (> 20 lines)
+  Location: loadSearches function
+  Explanation: The `loadSearches` function has more than 20 lines of code, making it difficult to understand and maintain.
+  Refactoring: Consider breaking the function into smaller, more manageable functions or methods.
+
+- Smell Name: Lazy/Magic Strings
+  Location: HISTORY_KEY constant
+  Explanation: The `HISTORY_KEY` constant is a string that seems to be used as a key for local storage but its meaning is not immediately clear from the context.
+  Refactoring: Consider renaming the constant to something more descriptive, such as `SEARCH_HISTORY_STORAGE_KEY`.
+
+- Smell Name: Duplicated Code
+  Location: addSearch and addAIResponse functions
+  Explanation: Both functions create a new search object with similar properties. This duplication can lead to maintenance issues if the structure of the search object changes.
+  Refactoring: Consider creating a function that creates the search object, and call this function from both `addSearch` and `addAIResponse`.
+
+- Smell Name: No Error Handling (for user-facing code)
+  Location: Throughout the file
+  Explanation: There is no explicit error handling for user-facing functions like `addSearch`, `addAIResponse`, and `deleteSearch`. This can lead to unexpected behavior when errors occur.
+  Refactoring: Consider adding try/catch blocks or returning error objects to handle potential errors gracefully.
+
+- Smell Name: No Comments (for complex code)
+  Location: Throughout the file
+  Explanation: There are no comments in the provided code, making it difficult for others to understand the purpose and behavior of certain parts of the codebase.
+  Refactoring: Consider adding comments to explain complex sections of the code or to document the purpose of functions and variables.
+
+Output:
+- Smell Name: Long Function (> 20 lines)
+  Location: loadSearches function
+  Explanation: The `loadSearches` function has more than 20 lines of code, making it difficult to understand and maintain.
+  Refactoring: Consider breaking the function into smaller, more manageable functions or methods.
+- Smell Name: Lazy/Magic Strings
+  Location: HISTORY_KEY constant
+  Explanation: The `HISTORY_KEY` constant is a string that seems to be used as a key for local storage but its meaning is not immediately clear from the context.
+  Refactoring: Consider renaming the constant to something more descriptive, such as `SEARCH_HISTORY_STORAGE_KEY`.
+- Smell Name: Duplicated Code
+  Location: addSearch and addAIResponse functions
+  Explanation: Both functions create a new search object with similar properties. This duplication can lead to maintenance issues if the structure of the search object changes.
+  Refactoring: Consider creating a function that creates the search object, and call this function from both `addSearch` and `addAIResponse`.
+- Smell Name: No Error Handling (for user-facing code)
+  Location: Throughout the file
+  Explanation: There is no explicit error handling for user-facing functions like `addSearch`, `addAIResponse`, and `deleteSearch`. This can lead to unexpected behavior when errors occur.
+  Refactoring: Consider adding try/catch blocks or returning error objects to handle potential errors gracefully.
+- Smell Name: No Comments (for complex code)
+  Location: Throughout the file
+  Explanation: There are no comments in the provided code, making it difficult for others to understand the purpose and behavior of certain parts of the codebase.
+  Refactoring: Consider adding comments to explain complex sections of the code or to document the purpose of functions and variables."
+mistral,pipes/data-table/src/lib/hooks/use-settings.tsx,88.1,8,2,1,0,2,0,3," - Smell Name: Long Function
+  Location: setGlobalSettings, setPipeSettings, loadGlobalSettings, loadPipeSettings, updateGlobalSettings, updatePipeSettings, getPreset
+  Explanation: Functions are too long and difficult to understand at a glance. This violates the principle of ""Single Responsibility Principle"" and makes the code harder to maintain.
+  Refactoring: Break each function into smaller, more manageable functions that perform one task each.
+
+- Smell Name: Lazy or Missing Comments
+  Location: Throughout the code
+  Explanation: There are no comments in the code to explain what each part does, making it hard for others to understand the logic.
+  Refactoring: Add comments explaining the purpose of functions, variables, and complex sections of the code.
+
+- Smell Name: Duplicated Code
+  Location: loadGlobalSettings, loadPipeSettings
+  Explanation: Both functions have similar logic for loading settings, which violates the ""Don't Repeat Yourself"" (DRY) principle.
+  Refactoring: Extract a helper function to handle the common logic and call it from both loadGlobalSettings and loadPipeSettings.
+
+- Smell Name: Large Class
+  Location: SettingsStore
+  Explanation: The class is too large, violating the ""Single Responsibility Principle"" and making it hard to understand and maintain.
+  Refactoring: Break the class into smaller classes or modules that handle specific responsibilities.
+
+- Smell Name: Magic Strings
+  Location: Throughout the code (e.g., 'default value', 'screenpipe-cloud')
+  Explanation: There are hardcoded strings without proper naming or explanation, making it difficult to understand their purpose and maintain consistency.
+  Refactoring: Replace magic strings with named constants or enums.
+
+- Smell Name: Unused Variable
+  Location: MightBeUpdated (in updateGlobalSettings and updatePipeSettings)
+  Explanation: The variable mightBeUpdated is assigned a value but never used again, which violates the ""Don't Repeat Yourself"" (DRY) principle.
+  Refactoring: Remove the unused variable or use it in the function if necessary.
+
+- Smell Name: Switch Statements with Many Cases
+  Location: getPreset
+  Explanation: The switch statement has many cases, making it hard to maintain and understand.
+  Refactoring: Consider using a mapping object or a more descriptive approach for handling the different cases.
+
+- Smell Name: Nested Conditional Statements
+  Location: getPreset
+  Explanation: There are nested conditional statements, making the code harder to read and understand.
+  Refactoring: Consider refactoring the logic to reduce nesting and make it more readable.
+
+Overall, there are several Code Smells in the provided code. It would be beneficial to refactor the code following the suggestions above to improve its maintainability and readability.
+
+""✅ No Code Smells detected."" (if the code is empty or too short)"
+mistral,pipes/data-table/src/lib/hooks/use-sql-autocomplete.tsx,90.37,8,2,0,0,1,0,5," - Smell Name: Long Function (LF_01)
+  Location: useSqlAutocomplete function
+  Explanation: The function is quite long and complex, making it hard to understand at a glance. This violates the principle of keeping functions small and focused.
+  Refactoring: Break down the function into smaller, more manageable functions or methods. Each function should perform one task.
+
+- Smell Name: Large Class (L_01)
+  Location: Not applicable as it's a React hook, not a class. However, the codebase might have other classes with similar issues.
+  Explanation: The hook manages state and side effects, which are typically the responsibilities of a component or a service in a larger application. This can make the code harder to test and maintain.
+  Refactoring: Consider separating concerns by moving the database interaction into a separate service or utility function.
+
+- Smell Name: Magic Number (MN_01)
+  Location: CACHE_DURATION constant
+  Explanation: The value of 5 minutes for caching is hardcoded and not explained anywhere in the code. This makes it difficult to understand why this specific time was chosen and how it affects the application's behavior.
+  Refactoring: Document the purpose of the constant and consider moving it to a configuration file if it can be changed without recompiling the code.
+
+- Smell Name: Duplicated Code (DC_01)
+  Location: fetchItems function body
+  Explanation: The same block of code is executed twice, once for caching and once for returning the items. This duplication increases the complexity of the function and makes it harder to maintain.
+  Refactoring: Combine the two blocks of code into one, updating the cache only when the data changes or when the cache duration expires.
+
+- Smell Name: Unused Variable (UV_01)
+  Location: response variable in fetchItems function
+  Explanation: The response variable is declared but never used within the try block. This can lead to confusion and makes the code harder to understand and maintain.
+  Refactoring: Remove the unused variable or use it as intended.
+
+- Smell Name: Hardcoded URL (HU_01)
+  Location: fetch call in fetchItems function
+  Explanation: The URL for the API is hardcoded, making it difficult to change without modifying the code. This violates the principle of loose coupling and can make the application less flexible.
+  Refactoring: Move the URL to a configuration file or environment variable so it can be easily changed without modifying the code.
+
+- Smell Name: Lazy Magic Number (LMN_01)
+  Location: LIMIT 100 in the query
+  Explanation: The limit for the number of results is hardcoded and not explained anywhere in the code. This makes it difficult to understand why this specific number was chosen and how it affects the application's behavior.
+  Refactoring: Document the purpose of the limit and consider making it configurable if necessary.
+
+- Smell Name: No Error Handling (NEH_01)
+  Location: fetchItems function, outside the try block
+  Explanation: There is no error handling for the case when an error occurs during the fetch request. This can lead to unexpected behavior and make it difficult to debug issues.
+  Refactoring: Add appropriate error handling for the fetch request, such as logging the error or displaying a user-friendly message.
+
+Overall, there are several code smells in the provided code that violate clean code principles. It would be beneficial to refactor the code to make it more maintainable and easier to understand."
+mistral,pipes/data-table/src/lib/types.ts,11.1,0,0,0,0,0,0,0," ✅ No Code Smells detected.
+
+The provided code follows clean coding practices and does not exhibit any of the common code smells listed in the Refactoring Guru catalog. It is well-structured, with clear variable and function names, and adheres to TypeScript's type system for better maintainability. However, it is important to note that this analysis is based solely on the provided code snippet and does not account for potential issues in the surrounding context or larger project."
+mistral,pipes/data-table/src/lib/utils.ts,54.75,5,1,0,0,1,0,3," - Smell Name: Long Function
+  Location: removeDuplicateSelections
+  Explanation: The function is quite long and complex, making it hard to understand at a glance. This violates the principle of keeping functions small and focused.
+  Refactoring: Break down the function into smaller, more manageable functions that each perform a specific task.
+
+- Smell Name: Duplicate Code
+  Location: getSimilarity and isDuplicate
+  Explanation: The same calculation (getting the similarity between two strings) is repeated in both functions. This violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Extract the duplicate code into a separate function to avoid redundancy.
+
+- Smell Name: Lazy or Missing Magical String Checks
+  Location: cn, removeDuplicateSelections
+  Explanation: The functions use string concatenation (`twMerge(clsx(inputs))` and `seenContents.push(content)`) which can lead to issues if the input is not a string or if it contains unexpected characters. This violates the principle of handling errors gracefully.
+  Refactoring: Use type checking or validation to ensure that the inputs are always strings before concatenating them.
+
+- Smell Name: Unused Import
+  Location: import { ContentItem } from ""@screenpipe/js"" (if this import is not used in the provided code)
+  Explanation: If the imported module is not used within the function, it violates the principle of keeping dependencies minimal.
+  Refactoring: Remove the unused import to reduce clutter and improve maintainability.
+
+- Smell Name: Hardcoded Values
+  Location: similarityThreshold = 0.9
+  Explanation: The threshold for similarity is hardcoded, making it difficult to adjust or customize the function's behavior. This violates the principle of flexibility and maintainability.
+  Refactoring: Consider making this value a parameter that can be passed to the function or set as a global constant.
+
+Overall, here are the refactored suggestions for the provided code:
+1. Break down the `removeDuplicateSelections` function into smaller functions.
+2. Extract the duplicate calculation of string similarity into a separate function.
+3. Use type checking or validation to ensure that inputs are always strings in `cn` and `removeDuplicateSelections`.
+4. Remove unused imports.
+5. Consider making the similarity threshold a parameter or global constant."
+mistral,pipes/data-table/tailwind.config.ts,8.8,0,0,0,0,0,0,0," ✅ No Code Smells detected.
+
+The provided code follows clean coding practices and does not exhibit any of the Code Smells listed in the Refactoring Guru catalog for the given source code. The code is well-structured, organized, and easy to understand."
+mistral,pipes/desktop-to-table/app/api/click-by-index/route.ts,91.0,6,0,0,0,1,0,5," - Smell Name: Duplicated Code
+  Location: Lines 6-10 and Lines 14-18
+  Explanation: The same error handling logic for JSON parsing errors is repeated twice, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Extract a helper function to handle JSON parsing errors and call it in both places.
+
+- Smell Name: Lazy Error Handling
+  Location: Lines 14-20
+  Explanation: The error message is not descriptive enough, making it difficult for developers to understand the root cause of the issue.
+  Refactoring: Provide a more meaningful error message that includes details about the specific problem encountered during JSON parsing or clicking by index operation.
+
+- Smell Name: Magic Number
+  Location: Line 12
+  Explanation: The number '2' is hardcoded and not defined anywhere, making it difficult to understand its purpose and maintain the code.
+  Refactoring: Define a constant for the element index or pass it as an argument to the function if it can vary.
+
+- Smell Name: Unused Variable
+  Location: Line 13 (`const result = ...`)
+  Explanation: The `result` variable is assigned a value but never used, which is wasteful and can lead to confusion.
+  Refactoring: Remove the unused variable or use it if it serves a purpose.
+
+- Smell Name: Long Line
+  Location: Line 19 (`return NextResponse.json(...);`)
+  Explanation: The line exceeds the recommended maximum length of 80 characters, making it difficult to read and understand.
+  Refactoring: Break the long line into multiple lines using proper indentation and line breaks.
+
+- Smell Name: Empty Catch Block
+  Location: Line 24
+  Explanation: The catch block does not handle any specific exception, which can lead to unpredictable behavior or silent failures.
+  Refactoring: Add specific exception handling or rethrow the error if it cannot be handled within the function.
+
+After refactoring, the code would look like this:
+
+```javascript
+import { NextResponse } from ""next/server"";
+import { pipe as browserPipe } from ""../../../../../screenpipe-js/browser-sdk/dist"";
+
+const handleJsonError = (error) => {
+  console.error(`JSON parsing error: ${error.message}`);
+  return NextResponse.json({ error: error.message }, { status: 500 });
+};
+
+const clickElementByIndex = async (index) => {
+  try {
+    const result = await browserPipe.operator.clickByIndex(index);
+    console.log(`clicked element at index ${index}`);
+    return NextResponse.json({ index, success: result });
+  } catch (clickError) {
+    // Safely extract error message as string
+    const errorMessage = clickError instanceof Error ? clickError.message : String(clickError);
+    console.error(`Click error: ${errorMessage}`);
+    // Preserve HTTP status if possible
+    const statusCode = (clickError as any).status || 500;
+    return NextResponse.json({ error: errorMessage }, { status: statusCode });
+  }
+};
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const index = body.element_index;
+
+    if (index === undefined) {
+      return handleJsonError({ error: ""element_index is required in request body"" });
+    }
+
+    if (typeof index !== 'number') {
+      return handleJsonError({ error: ""element_index must be a valid number"" });
+    }
+
+    return clickElementByIndex(index);
+  } catch (error) {
+    return handleJsonError(error);
+  }
+}
+```"
+mistral,pipes/desktop-to-table/app/api/component-source/route.ts,102.66,6,0,0,0,1,0,5," - Smell Name: Duplicated Code
+  Location: Multiple places (lines 10, 14, 18)
+  Explanation: The same string 'api:' is repeated multiple times which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Consider using a constant or function to store and reuse this string.
+
+- Smell Name: Long Line of Code
+  Location: Line 10, 14, 18, 23, 27
+  Explanation: Lines are too long which makes the code harder to read and understand.
+  Refactoring: Break long lines into multiple shorter ones using appropriate line breaks (80 characters as a guideline).
+
+- Smell Name: Magic Number
+  Location: Line 12, 16, 19, 23, 27
+  Explanation: Numerical values like '400', '404' are used directly in the code without any explanation or definition. This makes the code less maintainable and harder to understand.
+  Refactoring: Consider defining these constants at the top of the file or using an enumeration.
+
+- Smell Name: Lack of Error Handling
+  Location: Function level (entire function)
+  Explanation: The function does not handle all possible errors that might occur during the execution, such as issues with reading the file or accessing the file system. This can lead to unexpected behavior and crashes.
+  Refactoring: Consider adding try-catch blocks for handling specific errors or using a more robust error handling library.
+
+- Smell Name: Unused Variable
+  Location: Line 15 (`const projectRoot = process.cwd();`)
+  Explanation: The variable `projectRoot` is defined but not used after the line 24. This makes the code less efficient and harder to understand.
+  Refactoring: Remove the unused variable or use it if necessary.
+
+- Smell Name: Hardcoded Path
+  Location: Line 17 (`const cleanPath = normalizedPath...`)
+  Explanation: The path is hardcoded in the function which makes it less flexible and harder to maintain.
+  Refactoring: Consider making this a configurable option or using a more robust file system library that supports wildcard matching.
+
+After refactoring, the code would look cleaner and easier to understand:
+
+```javascript
+import { NextResponse } from 'next/server';
+import fs from 'fs/promises';
+import path from 'path';
+import { API_LOG_PREFIX } from './constants.js'; // New file for constants
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const filePath = searchParams.get('path');
+
+  if (!filePath) {
+    console.error(`${API_LOG_PREFIX}no path provided`);
+    return NextResponse.json({ error: 'no path provided' }, { status: 400 });
+  }
+
+  const normalizedPath = path.normalize(filePath).replace(/^(\.\.(\/|\\|$))+/, '');
+  const cleanPath = normalizeAndStripPrefix(normalizedPath);
+  const absolutePath = path.join(getProjectRoot(), cleanPath);
+
+  try {
+    await fs.access(absolutePath);
+  } catch (error) {
+    console.error(`${API_LOG_PREFIX}file not found: ${absolutePath}`);
+    return NextResponse.json({ error: 'file not found' }, { status: 404 });
+  }
+
+  const content = await fs.readFile(absolutePath, 'utf-8');
+  console.log(`${API_LOG_PREFIX}successfully read file, length: ${content.length}`);
+
+  return new NextResponse(content, {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  });
+}
+
+function normalizeAndStripPrefix(path) {
+  path = path.replace(/^\//, '');
+  path = path.replace(/^pipes\/example-pipe\//, '');
+  return path;
+}
+
+function getProjectRoot() {
+  return process.cwd();
+}
+```"
+mistral,pipes/desktop-to-table/app/api/fetch-external/route.ts,40.43,5,1,1,0,1,0,2," - Smell Name: Duplicated Code
+  Location: Lines 10-14, 17-21, 25-29
+  Explanation: The same logic for logging messages is repeated multiple times, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Create a helper function to log messages and call it where needed.
+
+- Smell Name: Lazy/Magic Strings
+  Location: Lines 6, 12, 18, 25, 30
+  Explanation: Hardcoded strings like ""nextUrl"", ""Content-Type"", etc., are not self-explanatory and can lead to maintenance issues.
+  Refactoring: Use constant variables or comments for better readability and maintainability.
+
+- Smell Name: Unused Variable
+  Location: Line 16 (`startTime`)
+  Explanation: The variable `startTime` is declared but not used after logging the fetch time.
+  Refactoring: Remove the unused variable or use it if necessary.
+
+- Smell Name: Long Function
+  Location: Function GET()
+  Explanation: The function is long and complex, making it harder to understand and maintain.
+  Refactoring: Break down the function into smaller, more manageable functions based on their responsibilities.
+
+- Smell Name: Switch Statements with Too Many Cases
+  Location: Not directly applicable (No switch statements in the provided code)
+  Explanation: If switch statements are added in the future, they might have too many cases, making the function harder to read and maintain.
+  Refactoring: Consider using polymorphism or other design patterns to reduce the number of cases.
+
+- Smell Name: No Code Smells detected (if no further issues are found after refactoring the above mentioned smells)."
+mistral,pipes/desktop-to-table/app/api/get-interactive-list/route.ts,150.96,6,0,0,0,1,0,5," - Smell Name: Long Line of Code
+  Location: Lines 10-15, 24-29, 36-41, 47-52
+  Explanation: Lines exceed the recommended maximum line length (80 characters) which makes the code harder to read and understand.
+  Refactoring: Break long lines into multiple shorter ones using appropriate line breaks.
+
+- Smell Name: Duplicated Code
+  Location: Lines 19-23, 34-38
+  Explanation: The same logic for converting string parameters to boolean is duplicated, which violates the DRY (Don't Repeat Yourself) principle.
+  Refactoring: Create a helper function to convert string parameters to boolean and use it in both places.
+
+- Smell Name: Magic Number
+  Location: Line 26
+  Explanation: The number 10 is used directly as the base for parsing an integer from a URL parameter, which makes the code less readable and maintainable.
+  Refactoring: Define a constant or variable for this value to make it more understandable.
+
+- Smell Name: Lack of Error Handling
+  Location: Function definition and lines 31-33
+  Explanation: The function does not handle errors that might occur during the execution of the `browserPipe` operation, which can lead to unexpected behavior or crashes.
+  Refactoring: Add proper error handling for potential issues during the execution of the `browserPipe` operation.
+
+- Smell Name: Unused Variable
+  Location: Line 18
+  Explanation: The variable `url` is declared but not used within the function, which makes the code less efficient and harder to understand.
+  Refactoring: Remove the unused variable or find a use for it.
+
+- Smell Name: Hardcoded Path
+  Location: Import statement
+  Explanation: The path to the Operator SDK is hardcoded, making it difficult to manage dependencies and potentially causing issues when moving or updating the codebase.
+  Refactoring: Use a package manager like npm or yarn to manage dependencies and import the Operator SDK module correctly.
+
+After refactoring, the code would look something like this:
+
+```javascript
+import { NextResponse } from ""next/server"";
+import { pipe as browserPipe } from ""@screenpipe-js/browser-sdk"";
+import { isBooleanParam } from ""./utils.js"";
+
+const MAX_LINE_LENGTH = 80;
+
+function getInteractiveList(request) {
+  const urlParams = new URLSearchParams(request.url);
+  const app = urlParams.get(""app"");
+  const windowName = urlParams.get(""window"") || undefined;
+
+  if (!app) {
+    console.error(""missing required parameter: app"");
+    return NextResponse.json(
+      { error: ""app parameter is required"" },
+      { status: 400 }
+    );
+  }
+
+  const params = {
+    withTextOnly: isBooleanParam(urlParams, ""with_text_only""),
+    interactableOnly: isBooleanParam(urlParams, ""interactable_only""),
+    includeSometimesInteractable: isBooleanParam(urlParams, ""include_sometimes_interactable""),
+    useBackgroundApps: isBooleanParam(urlParams, ""use_background_apps""),
+    activateApp: isBooleanParam(urlParams, ""activate_app""),
+    verbose: isBooleanParam(urlParams, ""verbose""),
+  };
+
+  const maxElements = urlParams.get(""max_elements"");
+  if (maxElements) {
+    params.max_elements = parseInt(maxElements, 10);
+  }
+
+  console.log(`listing elements for app: ${app}, window: ${windowName || 'any'}`);
+  console.log(`filters: ${JSON.stringify(params.filter)}`);
+  console.log(`options: max=${params.max_elements}, background=${params.useBackgroundApps}, activate=${params.activateApp}`);
+
+  try {
+    const result = await browserPipe.operator.get_interactable_elements({
+      app,
+      window: windowName,
+      ...params,
+    });
+
+    console.log(`found ${result.elements.length} elements in ${app}`);
+
+    let responseElements;
+    if (!params.verbose) {
+      responseElements = result.elements.map(el => {
+        // Use first letter of interactability as the indicator (d for definite, s for sometimes, n for none)
+        const interactabilityCode = el.interactability.charAt(0);
+        return `[${el.index}] [${interactabilityCode}] '${el.text}'`;
+      });
+      console.log(`formatted ${responseElements.length} elements in simplified format`);
+    } else {
+      responseElements = result.elements;
+      console.log(`returning ${responseElements.length} elements in verbose format`);
+    }
+
+    return NextResponse.json({
+      app,
+      window: windowName,
+      query_params: params,
+      elements: responseElements,
+      stats: result.stats
+    });
+  } catch (operationError) {
+    // Safely extract error message as string
+    const errorMessage = operationError instanceof Error
+      ? operationError.message
+      : String(operationError);
+
+    console.error(`get_interactable_elements error: ${errorMessage}`);
+
+    // Preserve HTTP status if possible
+    const statusCode = (operationError as any).status || 500;
+
+    return NextResponse.json(
+      { error: errorMessage },
+      { status: statusCode }
+    );
+  }
+}
+```"
+,,,159,,,,,,,

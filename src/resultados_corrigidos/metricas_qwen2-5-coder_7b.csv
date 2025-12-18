@@ -1,0 +1,570 @@
+Modelo,Arquivo,Tempo_Seg,Total_Smells,Bloaters,Object-Orientation Abusers,Change Preventers,Dispensables,Couplers,Outros,Analise_Raw,,,,,,"Tipo de ""Code Smell""",Contagem
+qwen2.5-coder:7b,pipes/data-table/next.config.ts,21.11,1,0,0,0,0,0,1,"- **Smell Name:** Unused Parameter
+  - **Location:** `webpack` function parameter `{ }`
+  - **Explanation:** The second parameter of the `webpack` function is unused and can be removed to clean up the code.
+  - **Refactoring:** Remove the unused parameter.
+
+```typescript
+import type { NextConfig } from ""next"";
+
+const nextConfig: NextConfig = {
+  transpilePackages: [""@screenpipe/js""],
+  webpack: (config) => {
+    return config;
+  },
+  devIndicators: {
+    buildActivity: false,
+    appIsrStatus: false,
+  },
+};
+
+export default nextConfig;
+```",,,,,,Duplicated Code,17
+qwen2.5-coder:7b,pipes/data-table/src/app/api/settings/route.ts,37.97,7,1,0,0,2,0,4,"- **Smell Name:** Duplicated Code
+  - **Location:** `GET` and `PUT` functions
+  - **Explanation:** Both functions have a similar structure for handling errors and retrieving settings from `settingsManager`.
+  - **Refactoring:** Extract the common logic into a separate function.
+
+- **Smell Name:** Long Method
+  - **Location:** `GET` and `PUT` functions
+  - **Explanation:** Both functions are quite long, making them hard to read and maintain.
+  - **Refactoring:** Break down each function into smaller, more focused functions.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `""data-table""` in the `settingsPath`
+  - **Explanation:** The string `""data-table""` is used multiple times without explanation.
+  - **Refactoring:** Define a constant for this value and use it throughout the code.
+
+- **Smell Name:** Lack of Error Handling
+  - **Location:** `GET` function, `await fs.readFile(settingsPath, ""utf8"")`
+  - **Explanation:** The error handling is too broad. It logs an error but does not provide a meaningful response to the client.
+  - **Refactoring:** Provide a more informative error response.
+
+- **Smell Name:** Inconsistent Naming
+  - **Location:** `rawSettings` and `persistedSettings`
+  - **Explanation:** The variable names are somewhat inconsistent. `rawSettings` seems to be the current settings, while `persistedSettings` is the loaded settings.
+  - **Refactoring:** Rename variables for clarity.
+
+- **Smell Name:** Overly Complex Conditionals
+  - **Location:** `PUT` function
+  - **Explanation:** The conditional logic in the `PUT` function is complex and hard to follow.
+  - **Refactoring:** Simplify the conditional logic by breaking it down into smaller functions or using a more structured approach.
+
+- **Smell Name:** Lack of Comments
+  - **Location:** Throughout the code
+  - **Explanation:** The code lacks comments, making it harder for others (and future you) to understand what each part does.
+  - **Refactoring:** Add comments to explain complex logic or non-obvious parts of the code.",,,,,,Long Method,12
+qwen2.5-coder:7b,pipes/data-table/src/app/layout.tsx,28.84,5,0,0,0,2,0,3,"- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `geistSans.variable` and `geistMono.variable`
+  - **Explanation:** The use of magic strings (`--font-geist-sans`, `--font-geist-mono`) makes the code less readable and harder to maintain.
+  - **Refactoring:** Replace with named constants.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Both `geistSans` and `geistMono` are configured similarly.
+  - **Explanation:** The same configuration is repeated for two different fonts, which can lead to inconsistencies if one needs to be changed.
+  - **Refactoring:** Create a utility function or helper to handle the common configuration.
+
+- **Smell Name:** Lack of Comments
+  - **Location:** No comments in the code.
+  - **Explanation:** The absence of comments makes it harder for other developers (or future you) to understand the purpose and functionality of the code.
+  - **Refactoring:** Add comments to explain the purpose of each function, variable, or complex logic.
+
+- **Smell Name:** Excessive Inline Styles
+  - **Location:** `className={`${geistSans.variable} ${geistMono.variable} antialiased`}`
+  - **Explanation:** The use of inline styles can make the code harder to read and maintain.
+  - **Refactoring:** Consider using a CSS-in-JS solution or a utility-first CSS framework to manage styles more effectively.
+
+- **Smell Name:** Hardcoded Strings
+  - **Location:** `lang=""en""`
+  - **Explanation:** The use of hardcoded strings can make the code less flexible and harder to maintain.
+  - **Refactoring:** Consider using environment variables or configuration files to manage language settings.",,,,,,Magic Numbers/Strings,10
+qwen2.5-coder:7b,pipes/data-table/src/app/page.tsx,20.33,3,0,0,0,1,0,2,"- **Smell Name:** Magic Numbers
+  - **Location:** Line 5 (`className=""flex flex-col gap-2 items-center justify-center h-full mt-4""`)
+  - **Explanation:** The use of fixed values like `gap-2`, `h-full`, and `mt-4` without clear context or constants makes the code less readable and harder to maintain.
+  - **Refactoring:** Define these values as CSS variables or constants.
+
+- **Smell Name:** Lack of Comments
+  - **Location:** Line 1 (`// ""use client"";`)
+  - **Explanation:** The comment is redundant and does not provide any meaningful information about the code's purpose or functionality.
+  - **Refactoring:** Remove the comment if it adds no value. If necessary, add a brief description of what the component does.
+
+- **Smell Name:** Overly Specific Component Naming
+  - **Location:** Line 3 (`export default function SearchPage() {`)
+  - **Explanation:** The name `SearchPage` suggests that this is a search-related page, but it doesn't clearly indicate its purpose or functionality.
+  - **Refactoring:** Rename the component to something more descriptive and contextually relevant.",,,,,,Magic Numbers,10
+qwen2.5-coder:7b,pipes/data-table/src/components/ai-presets-selector.tsx,5.91,0,0,0,0,0,0,0,No code to analyze.,,,,,,Lack of Error Handling,7
+qwen2.5-coder:7b,pipes/data-table/src/components/audio-transcriptions-table.tsx,4.7,0,0,0,0,0,0,0,No code to analyze.,,,,,,Overly Complex Conditionals,5
+qwen2.5-coder:7b,pipes/data-table/src/components/database-sidebar.tsx,49.26,8,2,0,0,2,1,3,"- **Smell Name:** Feature Envy
+  - **Location:** `useEffect` hook
+  - **Explanation:** The `useEffect` hook is performing logic related to the component's functionality (filtering tables based on OS) rather than managing its own state or props. This indicates that the function might be doing too much.
+  - **Refactoring:** Move the filtering logic into a separate utility function and call it from both the initial state setting and any potential re-renders.
+
+- **Smell Name:** Data Clumps
+  - **Location:** `allTables` array
+  - **Explanation:** The same icon is used for all items in the `allTables` array, which suggests that this data might be better represented as a single object with an array of names and display names.
+  - **Refactoring:** Create a separate component or utility to handle the rendering of each table item, passing the necessary props.
+
+- **Smell Name:** Long Method
+  - **Location:** `DatabaseSidebar` component
+  - **Explanation:** The `DatabaseSidebar` component is quite large, containing both state management and rendering logic. This can make it harder to understand and maintain.
+  - **Refactoring:** Break down the component into smaller, more focused components.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `useEffect` hook and initial state setting
+  - **Explanation:** The same filtering logic is used in both the `useEffect` hook and when setting the initial state of the `tables` variable.
+  - **Refactoring:** Extract the filtering logic into a separate function to avoid duplication.
+
+- **Smell Name:** Inefficient State Management
+  - **Location:** `useState` for `tables`
+  - **Explanation:** The component is using state to manage data that could be derived from props or computed within the component.
+  - **Refactoring:** Consider whether the state is necessary and, if not, remove it. If it is necessary, ensure that it is updated efficiently.
+
+- **Smell Name:** Lack of Abstraction
+  - **Location:** `DatabaseSidebar` component
+  - **Explanation:** The component does not abstract away its logic into smaller functions or components, making it harder to read and maintain.
+  - **Refactoring:** Break down the component into smaller, more focused functions or components.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `useEffect` hook
+  - **Explanation:** The string `""ui_monitoring""` is used in multiple places without being defined as a constant.
+  - **Refactoring:** Define constants for any strings or numbers that are used multiple times.
+
+- **Smell Name:** Lack of Comments/Documentation
+  - **Location:** `DatabaseSidebar` component
+  - **Explanation:** The component lacks comments or documentation, making it harder to understand its purpose and functionality.
+  - **Refactoring:** Add comments or documentation to explain the purpose and functionality of the component.",,,,,,Lack of Comments,5
+qwen2.5-coder:7b,pipes/data-table/src/components/markdown.tsx,23.12,3,0,0,0,0,0,3,"- **Smell Name:** Redundant Function Wrapping
+  - **Location:** `MemoizedReactMarkdown`
+  - **Explanation:** The component `MemoizedReactMarkdown` wraps `ReactMarkdown` with `memo`, but the comparison function provided does not cover all props that might affect the output. Specifically, it only checks `children` and `className`, which may not be sufficient if other props like `renderers`, `plugins`, etc., could change the rendered output.
+  - **Refactoring:** Consider adding more props to the comparison function or using a shallow compare for objects.
+
+- **Smell Name:** Lack of Type Safety
+  - **Location:** `MemoizedReactMarkdown`
+  - **Explanation:** The type definition for `Options` is imported but not used in the component. This could lead to potential issues if the types change without updating the component.
+  - **Refactoring:** Ensure that all props are properly typed and used within the component.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** None (not applicable)
+  - **Explanation:** There are no magic numbers or strings in this code snippet, so this smell does not apply here.
+  - **Refactoring:** N/A
+
+**Summary:**
+- Redundant Function Wrapping: Consider adding more props to the comparison function.
+- Lack of Type Safety: Ensure all props are properly typed and used within the component.",,,,,,Inconsistent Naming,4
+qwen2.5-coder:7b,pipes/data-table/src/components/ocr-data-table.tsx,05.01,0,0,0,0,0,0,0,No code to analyze.,,,,,,Lack of Documentation,4
+qwen2.5-coder:7b,pipes/data-table/src/components/page.tsx,23.34,4,1,0,0,1,0,2,"- **Smell Name:** Long Method
+  - **Location:** `renderTable` function
+  - **Explanation:** The `renderTable` function contains a switch statement with multiple cases, making it long and difficult to read and maintain.
+  - **Refactoring:** Extract each case into its own function.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `UiMonitoringTable` rendering logic in the `switch` statement
+  - **Explanation:** The same code is used for both cases, but with a conditional check on `navigator.userAgent`.
+  - **Refactoring:** Extract the duplicated code into its own function and pass the condition as a parameter.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `""ocr_text""`, `""video_chunks""`, etc.
+  - **Explanation:** The string literals are used multiple times without explanation, making it hard to understand what they represent.
+  - **Refactoring:** Define constants for these values at the top of the file.
+
+- **Smell Name:** Lack of Abstraction
+  - **Location:** `DatabaseSidebar` and `renderTable`
+  - **Explanation:** The components are tightly coupled, and there is no clear separation of concerns.
+  - **Refactoring:** Consider breaking down the component into smaller, more focused components.",,,,,,Lack of Input Validation,3
+qwen2.5-coder:7b,pipes/data-table/src/components/search-command.tsx,4.51,0,0,0,0,0,0,0,No code to analyze.,,,,,,Feature Envy,3
+qwen2.5-coder:7b,pipes/data-table/src/components/sql-autocomplete-input.tsx,30.51,5,1,0,0,1,0,3,"- **Smell Name:** Long Method
+  - **Location:** `SqlAutocompleteInput` component
+  - **Explanation:** The component has a large number of responsibilities and methods, making it difficult to understand and maintain.
+  - **Refactoring:** Consider breaking the component into smaller, more focused components.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `handleSelect`, `handleInputChange`, and `handleClearInput`
+  - **Explanation:** The same logic is repeated in multiple places, leading to code duplication.
+  - **Refactoring:** Extract common functionality into a separate function or hook.
+
+- **Smell Name:** Inefficient State Management
+  - **Location:** `useEffect` for updating local state when props change
+  - **Explanation:** React's built-in state management is already efficient; using an additional effect to update the state can be unnecessary.
+  - **Refactoring:** Remove the unnecessary effect and rely on React's state updates.
+
+- **Smell Name:** Overly Complex Conditionals
+  - **Location:** `useEffect` for handling outside clicks
+  - **Explanation:** The conditional logic inside the event listener is complex and hard to read.
+  - **Refactoring:** Simplify the condition by using a more straightforward approach, such as checking if the clicked element is not within the command ref.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `max-h-60` in the CSS class
+  - **Explanation:** Using magic numbers or strings makes the code less readable and harder to maintain.
+  - **Refactoring:** Replace magic numbers with named constants or variables.",,,,,,Inefficient State Management,3
+qwen2.5-coder:7b,pipes/data-table/src/components/video-chunks-table.tsx,4.72,0,0,0,0,0,0,0,No code to analyze.,,,,,,Lack of Type Safety,3
+qwen2.5-coder:7b,pipes/data-table/src/lib/actions/get-screenpipe-app-settings.ts,38.27,7,2,0,0,2,1,2,"- **Smell Name:** Long Method (if applicable)
+  - **Location:** `getScreenpipeAppSettings` and `updateScreenpipeAppSettings`
+  - **Explanation:** The methods are very simple and do not contain any complex logic, so this smell does not apply here.
+  - **Refactoring:** Not applicable.
+
+- **Smell Name:** Feature Envy
+  - **Location:** Both functions
+  - **Explanation:** The functions `getScreenpipeAppSettings` and `updateScreenpipeAppSettings` are directly accessing the `pipe.settings` object, which suggests that they might be better suited to belong in a different class or module where `pipe.settings` is more naturally encapsulated.
+  - **Refactoring:** Consider moving these methods to a new class or module that specifically handles settings.
+
+- **Smell Name:** God Object
+  - **Location:** Not applicable (since there's no single object handling everything)
+  - **Explanation:** The code does not exhibit the characteristics of a God Object, where a single class or object knows and does too much.
+  - **Refactoring:** Not applicable.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Not applicable (since there's no duplicated code)
+  - **Explanation:** There is no repeated code in the provided functions.
+  - **Refactoring:** Not applicable.
+
+- **Smell Name:** Inefficient Method Calls
+  - **Location:** Not applicable (since the method calls are straightforward and efficient)
+  - **Explanation:** The method calls `pipe.settings.getAll()` and `pipe.settings.update(newSettings)` appear to be direct and efficient.
+  - **Refactoring:** Not applicable.
+
+- **Smell Name:** Lack of Comments
+  - **Location:** Both functions
+  - **Explanation:** There are no comments explaining what the function does or why it is necessary.
+  - **Refactoring:** Add a brief comment above each function to explain its purpose and any important details.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** Not applicable (since there are no magic numbers or strings)
+  - **Explanation:** There are no hard-coded values that could be considered magic numbers or strings.
+  - **Refactoring:** Not applicable.
+
+**Summary:**
+- Feature Envy: Consider moving the methods to a new class or module.
+- Lack of Comments: Add comments above each function explaining its purpose.",,,,,,God Object,3
+qwen2.5-coder:7b,pipes/data-table/src/lib/actions/video-actions.ts,33.62,6,1,0,0,1,0,4,"- **Smell Name:** Long Method
+  - **Location:** `getMediaFile` function
+  - **Explanation:** The function `getMediaFile` is doing multiple things: reading a file, converting it to base64, and determining the MIME type. This violates the Single Responsibility Principle.
+  - **Refactoring:** Split the function into smaller functions with single responsibilities.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `getMimeType` function
+  - **Explanation:** The logic for determining if a file is audio or video is duplicated in multiple places. This can lead to inconsistencies and maintenance issues.
+  - **Refactoring:** Extract the logic into a helper function.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `getMimeType` function
+  - **Explanation:** The MIME types are hardcoded as strings, which makes the code less maintainable. If there's a change in the file format or MIME type, it needs to be updated manually.
+  - **Refactoring:** Use constants for MIME types.
+
+- **Smell Name:** Error Handling
+  - **Location:** `getMediaFile` function
+  - **Explanation:** The error handling is not very descriptive. It logs an error and throws a new error with the same message, which doesn't provide much value.
+  - **Refactoring:** Improve error messages to include more context.
+
+- **Smell Name:** Inefficient String Operations
+  - **Location:** `getMimeType` function
+  - **Explanation:** The string operations for extracting the file extension and checking if it's audio or video are not very efficient. They can be simplified.
+  - **Refactoring:** Use a more efficient method to extract the file extension.
+
+- **Smell Name:** Hardcoded File Paths
+  - **Location:** `getMediaFile` function
+  - **Explanation:** The file path is hardcoded, which makes it less flexible and harder to test.
+  - **Refactoring:** Pass the file path as a parameter to the function.",,,,,,Data Clumps,2
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-copy-to-clipboard.tsx,31.3,5,0,0,0,1,0,4,"- **Smell Name:** Magic Number
+  - **Location:** `timeout = 2000`
+  - **Explanation:** The timeout value (2000) is a magic number without an explanation of its purpose or significance.
+  - **Refactoring:** Define a constant for the timeout value with a descriptive name, e.g., `const CLIPBOARD_COPIED_TIMEOUT = 2000;`
+
+- **Smell Name:** Duplicated Code
+  - **Location:** The check for `typeof window === ""undefined""` and `!navigator.clipboard?.writeText` is duplicated in the function.
+  - **Explanation:** This code can be extracted into a helper function to avoid duplication.
+  - **Refactoring:** Create a helper function, e.g., `isClipboardSupported`, to encapsulate this logic.
+
+- **Smell Name:** Lack of Error Handling
+  - **Location:** The function does not handle errors that might occur during the clipboard write operation.
+  - **Explanation:** Errors should be handled gracefully to provide feedback or fallback behavior.
+  - **Refactoring:** Add error handling using a try-catch block around `navigator.clipboard.writeText`.
+
+- **Smell Name:** Lack of Type Safety
+  - **Location:** The function does not enforce type safety for the input value.
+  - **Explanation:** TypeScript's type system can be used to ensure that only strings are passed to the function.
+  - **Refactoring:** Use TypeScript's type annotations to specify that the `value` parameter should be a string.
+
+- **Smell Name:** Lack of Documentation
+  - **Location:** The code lacks documentation or comments explaining its purpose and functionality.
+  - **Explanation:** Proper documentation helps other developers understand the code more easily.
+  - **Refactoring:** Add JSDoc comments to describe the function's parameters, return value, and any side effects.",,,,,,Lack of Abstraction,2
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-debounce.tsx,24.63,4,0,0,0,0,0,4,"- **Smell Name:** Redundant State Update
+  - **Location:** `useDebounce` function
+  - **Explanation:** The state update in `setDebouncedValue(value)` might not be necessary if the value is already up-to-date, leading to unnecessary re-renders.
+  - **Refactoring:** Consider checking if the new value is different from the current debounced value before updating.
+
+- **Smell Name:** Magic Number
+  - **Location:** `useDebounce` function
+  - **Explanation:** The delay parameter is a magic number without any explanation or documentation, making it hard to understand its purpose.
+  - **Refactoring:** Replace the magic number with a named constant that explains its meaning.
+
+- **Smell Name:** Lack of Type Safety
+  - **Location:** `useDebounce` function
+  - **Explanation:** The type `T` is not constrained, which means it could be any type, potentially leading to runtime errors.
+  - **Refactoring:** Use a more specific type or add constraints to ensure the type safety.
+
+- **Smell Name:** Lack of Documentation
+  - **Location:** `useDebounce` function
+  - **Explanation:** The function lacks documentation, making it hard for other developers to understand its purpose and usage.
+  - **Refactoring:** Add JSDoc comments or TypeScript types to document the function's parameters and return type.",,,,,,Lack of Error Logging,2
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-health-check.tsx,32.17,5,1,0,0,1,0,3,"- **Smell Name:** God Object
+- **Location:** `useHealthCheck` function
+- **Explanation:** The `useHealthCheck` hook contains multiple responsibilities such as managing state, fetching data, and debouncing the fetch call. This violates the Single Responsibility Principle (SRP).
+- **Refactoring:** Refactor the hook into smaller hooks or services to separate concerns.
+
+- **Smell Name:** Magic Numbers
+- **Location:** `debouncedFetchHealth` callback debounce time (200) and interval time (1000)
+- **Explanation:** The use of magic numbers makes the code less readable and harder to maintain. It's not clear what these numbers represent.
+- **Refactoring:** Define constants for these values at the top of the file.
+
+- **Smell Name:** Duplicated Code
+- **Location:** `isHealthChanged` function and the comparison logic inside `fetchHealth`
+- **Explanation:** The same comparison logic is used in two different places, which can lead to inconsistencies if one place is updated but not the other.
+- **Refactoring:** Extract the comparison logic into a separate utility function.
+
+- **Smell Name:** Inconsistent State Management
+- **Location:** `healthRef` and `setHealth`
+- **Explanation:** The use of a ref for `health` can lead to inconsistencies if `setHealth` is called without updating the ref, or vice versa.
+- **Refactoring:** Ensure that both state and ref are updated consistently.
+
+- **Smell Name:** Overly Complex Conditionals
+- **Location:** `fetchHealth` error handling
+- **Explanation:** The error handling logic is complex and can be simplified by breaking it down into smaller functions.
+- **Refactoring:** Extract the error handling logic into a separate function.",,,,,,Inconsistent State Management,1
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-pipe-settings.tsx,23.57,4,1,0,0,1,0,2,"- **Smell Name:** Long Method
+  - **Location:** `usePipeSettings` function
+  - **Explanation:** The `usePipeSettings` function contains multiple responsibilities such as loading settings, updating settings, and getting presets. This violates the Single Responsibility Principle (SRP).
+  - **Refactoring:** Consider breaking down the function into smaller, more focused functions.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `settingsStore.getStore().pipeSettings[pipeName] || null`
+  - **Explanation:** The same expression is used twice in the code. This can be refactored to avoid redundancy.
+  - **Refactoring:** Store the result of `settingsStore.getStore().pipeSettings[pipeName]` in a variable and reuse it.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `""aiPresetId""`
+  - **Explanation:** The string `""aiPresetId""` is used without explanation. This can make the code harder to understand and maintain.
+  - **Refactoring:** Define constants for such values if they are reused multiple times.
+
+- **Smell Name:** Lack of Error Handling
+  - **Location:** `await settingsStore.loadPipeSettings(pipeName);`
+  - **Explanation:** The function does not handle potential errors that might occur during the loading of pipe settings.
+  - **Refactoring:** Add error handling to manage exceptions gracefully.",,,,,,Inefficient Data Structures,1
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-search-history.tsx,50.44,7,1,0,0,1,1,4,"- **Smell Name:** Data Clump  
+  **Location:** `searchParams` object in `SearchHistory` interface and `addSearch` function  
+  **Explanation:** The same properties (`content_type`, `limit`, `offset`, `start_time`, `end_time`, `app_name`, `window_name`, `include_frames`, `min_length`, `max_length`) are repeated in both the interface and the function. This violates clean code because it leads to redundancy and makes maintenance harder.  
+  **Refactoring:** Extract these properties into a separate interface or type alias.
+
+- **Smell Name:** Feature Envy  
+  **Location:** `addAIResponse` function  
+  **Explanation:** The function primarily deals with updating the search history, which is not its primary responsibility (it should be focused on adding AI responses). This violates clean code because it leads to functions that do too much.  
+  **Refactoring:** Extract the logic for updating the search history into a separate function.
+
+- **Smell Name:** Long Method  
+  **Location:** `addSearch` function  
+  **Explanation:** The function is quite long, making it difficult to understand and maintain. This violates clean code because it leads to functions that are hard to read and test.  
+  **Refactoring:** Break the function into smaller, more focused functions.
+
+- **Smell Name:** Duplicated Code  
+  **Location:** `loadSearches` and `saveSearches` functions  
+  **Explanation:** Both functions use similar logic for interacting with local storage. This violates clean code because it leads to redundancy and makes maintenance harder.  
+  **Refactoring:** Extract the common logic into a separate function.
+
+- **Smell Name:** Inconsistent Naming**  
+  **Location:** `searchParams` in `SearchHistory` interface vs. `searchParams` in `addSearch` function  
+  **Explanation:** The same property is named differently in different places, which can lead to confusion and errors. This violates clean code because it leads to inconsistent naming conventions.  
+  **Refactoring:** Ensure consistent naming throughout the codebase.
+
+- **Smell Name:** Lack of Error Handling**  
+  **Location:** `addSearch` function  
+  **Explanation:** The function does not handle potential errors when creating a new search or adding AI responses. This violates clean code because it leads to functions that can fail silently, making debugging harder.  
+  **Refactoring:** Add proper error handling to the function.
+
+- **Smell Name:** Magic Numbers**  
+  **Location:** `crypto.randomUUID()` is used multiple times in the code. While not necessarily a smell, it's good practice to define constants for such values if they are used frequently.  
+  **Explanation:** The use of `crypto.randomUUID()` without a constant can make the code harder to read and maintain. This violates clean code because it leads to magic numbers that are hard to understand.  
+  **Refactoring:** Define constants for any repeated values, such as `crypto.randomUUID()`.",,,,,,Unused Parameter,1
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-settings.tsx,56.05,9,2,0,0,1,0,6,"- **Smell Name:** God Object
+  - **Location:** `SettingsStore` class
+  - **Explanation:** The `SettingsStore` class handles both global and pipe settings, as well as loading and updating these settings. It also manages listeners for changes. This makes the class a god object, handling too many responsibilities.
+  - **Refactoring:** Consider splitting the `SettingsStore` into smaller classes, each responsible for a single aspect (e.g., managing global settings, managing pipe settings).
+
+- **Smell Name:** Long Method
+  - **Location:** `updatePipeSettings` method in `SettingsStore`
+  - **Explanation:** The `updatePipeSettings` method is quite long and complex, performing multiple tasks such as fetching current settings, updating them, and saving the new settings. This makes it difficult to understand and maintain.
+  - **Refactoring:** Break down the `updatePipeSettings` method into smaller, more focused methods.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Multiple places in the code where similar logic is repeated (e.g., fetching current settings before updating).
+  - **Explanation:** The same code is written multiple times, which increases the risk of bugs and makes maintenance harder.
+  - **Refactoring:** Extract common logic into separate methods or helper functions.
+
+- **Smell Name:** Inconsistent Naming**
+  - **Location:** Various variable names (e.g., `mightBeUpdated`, `updatedSettings`)
+  - **Explanation:** Variable names are not consistently descriptive, which can make the code harder to understand.
+  - **Refactoring:** Use more descriptive and consistent naming conventions.
+
+- **Smell Name:** Magic Numbers**
+  - **Location:** The default value for `exampleSetting` is hardcoded as `""default value""`.
+  - **Explanation:** Hardcoded values like this are not easily configurable or changeable.
+  - **Refactoring:** Consider using constants or configuration files to manage such values.
+
+- **Smell Name:** Overly Complex Conditionals**
+  - **Location:** The `getPreset` method contains complex conditional logic for handling different provider types and default presets.
+  - **Explanation:** This makes the code harder to read and understand.
+  - **Refactoring:** Simplify the conditional logic by breaking it down into smaller, more manageable parts.
+
+- **Smell Name:** Lack of Error Handling**
+  - **Location:** While there is some error handling in place, it could be improved. For example, logging errors without providing additional context or taking corrective actions.
+  - **Refactoring:** Improve error handling by providing more detailed logs and taking appropriate corrective actions when an error occurs.
+
+- **Smell Name:** Inefficient State Management**
+  - **Location:** The `SettingsStore` class manages state using a combination of properties and methods, which can lead to inefficiencies in state updates.
+  - **Refactoring:** Consider using a more efficient state management solution, such as Redux or MobX, if the application grows.
+
+- **Smell Name:** Lack of Documentation**
+  - **Location:** The code lacks comments and documentation, making it harder for other developers to understand its purpose and functionality.
+  - **Refactoring:** Add comments and documentation to explain the purpose and functionality of key methods and classes.",,,,,,Lack of Comments and Documentation,1
+qwen2.5-coder:7b,pipes/data-table/src/lib/hooks/use-sql-autocomplete.tsx,182.03,0,0,0,0,0,0,0,"Erro: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=180)",,,,,,Security Vulnerability (Path Traversal),1
+qwen2.5-coder:7b,pipes/data-table/src/lib/types.ts,03.04,0,0,0,0,0,0,0,No code to analyze.,,,,,,Redundant State Update,1
+qwen2.5-coder:7b,pipes/data-table/src/lib/utils.ts,39.07,7,1,0,0,2,0,4,"- **Smell Name:** Long Method
+  - **Location:** `removeDuplicateSelections`
+  - **Explanation:** The method is quite long and does multiple things: filtering out duplicates based on similarity, managing state, and iterating over the results. This makes it hard to understand and maintain.
+  - **Refactoring:** Break down the method into smaller functions with a single responsibility.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** `content` assignment within the loop
+  - **Explanation:** The same logic is repeated for different types of items (`OCR`, `Audio`, `UI`). This can be simplified by using polymorphism or a mapping.
+  - **Refactoring:** Use a mapping from item type to content extraction.
+
+- **Smell Name:** Magic Numbers
+  - **Location:** `similarityThreshold` default value (0.9)
+  - **Explanation:** The threshold is hardcoded, making it difficult to adjust without changing the code.
+  - **Refactoring:** Define this as a constant or configurable parameter.
+
+- **Smell Name:** Inefficient Data Structures
+  - **Location:** `seenContents`
+  - **Explanation:** Using an array for checking duplicates is inefficient. A set would be more appropriate since it provides average O(1) time complexity for lookups.
+  - **Refactoring:** Replace `seenContents` with a `Set`.
+
+- **Smell Name:** Overly Complex Conditionals
+  - **Location:** `isDuplicate` function
+  - **Explanation:** The condition inside the `some` method is complex and hard to read. It could be simplified by extracting it into its own function.
+  - **Refactoring:** Extract the similarity check logic into a separate function.
+
+- **Smell Name:** Lack of Error Handling
+  - **Location:** `item.type` check
+  - **Explanation:** The code does not handle cases where `item.type` is undefined or null, which could lead to runtime errors.
+  - **Refactoring:** Add error handling for potential issues with `item.type`.
+
+- **Smell Name:** Lack of Comments and Documentation
+  - **Location:** Throughout the file
+  - **Explanation:** The code lacks comments explaining what each part does, making it harder for others (or future you) to understand.
+  - **Refactoring:** Add comments and documentation to explain the purpose and functionality of each function and key logic.",,,,,,Lack of Comments/Documentation,1
+qwen2.5-coder:7b,pipes/data-table/tailwind.config.ts,182.05,0,0,0,0,0,0,0,"Erro: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=180)",,,,,,Hardcoded File Paths,1
+qwen2.5-coder:7b,pipes/desktop-to-table/app/api/click-by-index/route.ts,29.68,5,0,0,0,1,0,4,"- **Smell Name:** Magic Numbers
+  - **Location:** `index === undefined` and `typeof index !== 'number'`
+  - **Explanation:** The code uses magic numbers (2) without explanation of what they represent, making the code harder to understand and maintain.
+  - **Refactoring:** Replace the magic number with a named constant.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Error handling blocks in `try...catch` statements
+  - **Explanation:** The same error handling logic is repeated for different types of errors, leading to code duplication and potential inconsistencies.
+  - **Refactoring:** Extract the common error handling logic into a separate function.
+
+- **Smell Name:** Lack of Input Validation
+  - **Location:** No validation for other possible invalid inputs (e.g., negative numbers)
+  - **Explanation:** The current implementation only checks if `element_index` is undefined or not a number, but it does not handle other potential invalid inputs.
+  - **Refactoring:** Add additional validation to ensure the input is within expected ranges.
+
+- **Smell Name:** Lack of Error Logging
+  - **Location:** Only logs errors to the console
+  - **Explanation:** While logging errors to the console can be useful for debugging, it does not provide a way for users or other systems to understand what went wrong.
+  - **Refactoring:** Consider using a structured logging system that allows for better error tracking and monitoring.
+
+- **Smell Name:** Lack of Documentation
+  - **Location:** No comments or documentation in the code
+  - **Explanation:** The code lacks any explanation of its purpose, inputs, outputs, or how it works, making it difficult for other developers to understand and maintain.
+  - **Refactoring:** Add comments and documentation to explain the code's functionality.",,,,,,Inefficient String Operations,1
+qwen2.5-coder:7b,pipes/desktop-to-table/app/api/component-source/route.ts,40.71,6,0,0,0,0,0,6,"- **Smell Name:** Security Vulnerability (Path Traversal)
+  - **Location:** `normalizedPath.replace(/^(\.\.(\/|\\|$))+/, '')`
+  - **Explanation:** The code attempts to prevent path traversal by normalizing the path and removing any occurrences of `..`. However, this approach is not sufficient as it does not handle all possible path traversal attacks. For example, paths like `./../etc/passwd` can still be exploited.
+  - **Refactoring:** Use a whitelist approach to allow only specific directories or files.
+
+- **Smell Name:** Code Duplication
+  - **Location:** Multiple occurrences of `console.log` statements for debugging purposes.
+  - **Explanation:** The code logs the same information multiple times, which can clutter the logs and make it harder to maintain.
+  - **Refactoring:** Consolidate logging into a single function or use a logging library that supports different log levels.
+
+- **Smell Name:** Magic Numbers
+  - **Location:** `process.cwd()` is used to get the current working directory, but there are no comments explaining why this is necessary.
+  - **Explanation:** The code uses magic numbers (like `400`, `404`, and `500`) without explanation, making it harder for others to understand the purpose of these values.
+  - **Refactoring:** Use named constants or enums to represent these values.
+
+- **Smell Name:** Lack of Error Handling
+  - **Location:** The code catches all errors with a generic catch block, which can hide important information about what went wrong.
+  - **Explanation:** Catching all errors without providing specific handling for different types of exceptions can make debugging difficult and can lead to security vulnerabilities.
+  - **Refactoring:** Provide specific error handling for different types of exceptions.
+
+- **Smell Name:** Inefficient File Access
+  - **Location:** The code reads the file content into memory, which can be inefficient if the file is large.
+  - **Explanation:** Reading large files into memory can cause performance issues and high memory usage.
+  - **Refactoring:** Consider streaming the file content instead of reading it all at once.
+
+- **Smell Name:** Lack of Input Validation
+  - **Location:** The code does not validate the input parameters, which can lead to unexpected behavior or security vulnerabilities.
+  - **Explanation:** Without validating the input parameters, the code is vulnerable to various types of attacks, such as SQL injection or cross-site scripting (XSS).
+  - **Refactoring:** Validate all input parameters and sanitize user inputs.",,,,,,Error Handling,1
+qwen2.5-coder:7b,pipes/desktop-to-table/app/api/fetch-external/route.ts,26.29,5,1,0,0,1,0,3,"- **Smell Name:** Long Method
+  - **Location:** `GET` function
+  - **Explanation:** The method is quite long and does multiple things: parsing the request, validating the URL, fetching content, and handling responses. This makes it hard to understand and maintain.
+  - **Refactoring:** Break down the method into smaller functions.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Error handling blocks
+  - **Explanation:** The same error handling logic is repeated multiple times (e.g., logging errors, returning JSON responses with specific statuses).
+  - **Refactoring:** Extract common error handling logic into a separate function.
+
+- **Smell Name:** Magic Numbers
+  - **Location:** `Cache-Control` header value (`max-age=3600`)
+  - **Explanation:** The cache duration is hardcoded without explanation.
+  - **Refactoring:** Use named constants for magic numbers.
+
+- **Smell Name:** Lack of Input Validation
+  - **Location:** URL validation using `new URL(url)`
+  - **Explanation:** While this checks if the string is a valid URL, it doesn't ensure that the URL points to a resource that can be fetched.
+  - **Refactoring:** Consider adding more robust URL validation or checking the response status before proceeding.
+
+- **Smell Name:** Lack of Error Logging
+  - **Location:** General error handling
+  - **Explanation:** The general error message is vague and doesn't provide much context.
+  - **Refactoring:** Log more detailed error information for better debugging.",,,,,,Inefficient Method Calls,1
+qwen2.5-coder:7b,pipes/desktop-to-table/app/api/get-interactive-list/route.ts,29.65,5,1,0,0,2,0,2,"- **Smell Name:** Long Method
+  - **Location:** `GET` function
+  - **Explanation:** The method is quite long and does multiple things including parsing query parameters, validating input, making an API call, formatting the response, and handling errors. This makes it hard to understand and maintain.
+  - **Refactoring:** Break down the method into smaller functions each responsible for a single task.
+
+- **Smell Name:** Duplicated Code
+  - **Location:** Error handling in `try-catch` blocks
+  - **Explanation:** The error handling logic is duplicated between the main try-catch block and the nested try-catch block inside the API call.
+  - **Refactoring:** Extract the common error handling logic into a separate function.
+
+- **Smell Name:** Magic Numbers/Strings
+  - **Location:** `maxElements` parsing and default value
+  - **Explanation:** The string ""max_elements"" is used multiple times without being defined as a constant or variable.
+  - **Refactoring:** Define constants for such values to make the code more readable and maintainable.
+
+- **Smell Name:** Inconsistent Naming
+  - **Location:** `interactable_only` vs. `include_sometimes_interactable`
+  - **Explanation:** The naming conventions are inconsistent, which can lead to confusion.
+  - **Refactoring:** Ensure consistent naming throughout the codebase.
+
+- **Smell Name:** Lack of Comments
+  - **Location:** Various parts of the code
+  - **Explanation:** There is a lack of comments explaining complex logic or decisions made in the code.
+  - **Refactoring:** Add comments to explain the purpose and rationale behind key sections of the code.",,,,,,Redundant Function Wrapping,1
+,,,111,,,,,,,,,,,,,Overly Specific Component Naming,1
+,,,,,,,,,,,,,,,,Hardcoded Strings,1
+,,,,,,,,,,,,,,,,Excessive Inline Styles,1
+,,,,,,,,,,,,,,,,Inefficient File Access,1
+,,,,,,,,,,,,,,,,Total,111

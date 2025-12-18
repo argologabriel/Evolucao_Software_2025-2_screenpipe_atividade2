@@ -1,0 +1,635 @@
+Modelo,Arquivo,Tempo_Seg,Total_Smells,Bloaters,Object-Orientation Abusers,Change Preventers,Dispensables,Couplers,Outros,Analise_Raw
+llama3.1:8b,pipes/data-table/next.config.ts,22.05,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `webpack` function (line 5)
+- **Explanation:** The `webpack` function is doing nothing but returning the original config without any modifications. This makes it a long method that could be simplified or removed.
+- **Refactoring:** Consider removing this function altogether, as it's not performing any necessary operations.
+
+✅ No other Code Smells detected."
+llama3.1:8b,pipes/data-table/src/app/api/settings/route.ts,86.84,9,2,0,0,2,0,5,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: **Long Method**
+- Location: `GET()` function (lines 13-44)
+- Explanation: The `GET()` function is too long and complex, performing multiple tasks such as loading settings, merging persisted settings with current settings, and handling errors.
+- Refactoring: Break down the `GET()` function into smaller, more focused functions to improve readability and maintainability.
+
+**2. Switch Statement (not present), but similar behavior**
+- Smell Name: **Switch Statement**
+- Location: `PUT()` function (lines 45-74)
+- Explanation: The `PUT()` function uses multiple if-else statements to handle different scenarios, which can be replaced with a switch statement for better readability.
+- Refactoring: Replace the if-else chain with a switch statement or consider using polymorphism.
+
+**3. Duplicate Code**
+- Smell Name: **Duplicate Code**
+- Location: `GET()` and `PUT()` functions (lines 13-44 and 45-74)
+- Explanation: Both functions use similar error handling mechanisms, which can be extracted into a separate function to avoid code duplication.
+- Refactoring: Extract the common error handling logic into a separate function.
+
+**4. Complex Conditional**
+- Smell Name: **Complex Conditional**
+- Location: `PUT()` function (lines 45-74)
+- Explanation: The conditional statements in the `PUT()` function are complex and difficult to understand due to multiple conditions and nested if-else statements.
+- Refactoring: Simplify the conditionals by breaking them down into smaller, more focused functions.
+
+**5. God Object**
+- Smell Name: **God Object**
+- Location: `GET()` and `PUT()` functions (lines 13-74)
+- Explanation: Both functions are responsible for multiple tasks, including loading settings, merging persisted settings with current settings, updating settings, and handling errors.
+- Refactoring: Consider creating separate classes or modules for each task to reduce the complexity of these functions.
+
+**6. Long Variable Names**
+- Smell Name: **Long Variable Names**
+- Location: `GET()` function (lines 13-44)
+- Explanation: Some variable names are too long and descriptive, which can make the code harder to read.
+- Refactoring: Use shorter, more concise variable names while maintaining their meaning.
+
+**7. Magic Numbers**
+- Smell Name: **Magic Numbers**
+- Location: `GET()` function (lines 13-44)
+- Explanation: The numbers used in the path construction (e.g., ""pipes"", ""data-table"") are magic numbers that lack clear meaning.
+- Refactoring: Replace these numbers with named constants or enums to improve code readability.
+
+**8. Dead Code**
+- Smell Name: **Dead Code**
+- Location: `GET()` function (lines 13-44)
+- Explanation: The `console.log` statements in the error handling blocks are dead code, as they do not provide any useful information.
+- Refactoring: Remove these statements to declutter the code.
+
+**9. Duplicate Comment**
+- Smell Name: **Duplicate Comment**
+- Location: `GET()` and `PUT()` functions (lines 13-74)
+- Explanation: The comments explaining the error handling mechanisms are duplicated in both functions.
+- Refactoring: Remove the duplicate comment to maintain consistency.
+
+✅ No further Code Smells detected."
+llama3.1:8b,pipes/data-table/src/app/layout.tsx,15.55,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `RootLayout` function (entire function)
+- **Explanation:** The `RootLayout` function is doing too much work and has a complex structure. It's responsible for rendering the HTML document, including setting up the font variables and antialiasing. This makes it hard to understand and maintain.
+- **Refactoring:** Break down the `RootLayout` function into smaller, more focused functions, each with its own responsibility (e.g., one for setting up fonts, another for rendering the HTML)."
+llama3.1:8b,pipes/data-table/src/app/page.tsx,15.04,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** The `SearchPage` function (entire file)
+- **Explanation:** This function performs multiple unrelated tasks: rendering a JSX structure and importing another component (`DataPage`). It's too complex and does not follow the Single Responsibility Principle.
+- **Refactoring:** Break down this function into smaller, more focused functions. For example, create separate functions for rendering the JSX structure and importing the `DataPage` component.
+
+✅ No other Code Smells were detected in this code snippet."
+llama3.1:8b,pipes/data-table/src/components/ai-presets-selector.tsx,81.22,7,4,1,0,2,0,0,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method: God Object**
+- Location: `AIProviderConfig` function
+- Explanation: This function performs multiple tasks such as handling state updates, API calls, and form data management, making it difficult to understand and maintain.
+- Refactoring: Break down the `AIProviderConfig` function into smaller, more focused functions, each responsible for a specific task.
+
+**2. Switch Statements with Many Cases**
+- Location: `validateId` function
+- Explanation: The `validateId` function has multiple conditions that check for different scenarios, making it hard to add or modify rules in the future.
+- Refactoring: Consider using a more robust validation library or creating separate functions for each validation rule.
+
+**3. Duplicate Code**
+- Location: Multiple places (e.g., `AIProviderConfig`, `validateId`)
+- Explanation: The same code is repeated in multiple places, making it harder to maintain and update.
+- Refactoring: Extract the duplicated code into a separate function or utility class to avoid repetition.
+
+**4. Long Parameter List**
+- Location: `AIProviderConfig` function
+- Explanation: The `AIProviderConfig` function has many parameters, making it difficult to understand what each parameter represents.
+- Refactoring: Consider using an object or a data structure to pass the configuration options instead of multiple separate parameters.
+
+**5. Dead Code**
+- Location: Unused imports (e.g., `CommandEmpty`, `CommandInput`)
+- Explanation: Some imported components are not used in the code, making it cluttered and harder to maintain.
+- Refactoring: Remove unused imports or consider refactoring the code to use these components if they are relevant.
+
+**6. Complex Conditionals**
+- Location: Multiple places (e.g., `validateId`, `AIProviderConfig`)
+- Explanation: The code has complex conditionals that make it hard to understand and predict the behavior.
+- Refactoring: Simplify the conditionals by breaking them down into smaller, more manageable parts or using a more robust conditional logic.
+
+**7. Long Variable Names**
+- Location: Some variable names (e.g., `DEFAULT_PROMPT`)
+- Explanation: Some variable names are too long and descriptive, making it harder to read and understand the code.
+- Refactoring: Consider shorter, more concise variable names that still convey their purpose.
+
+These Code Smells can be addressed by applying the suggested refactoring techniques to improve the maintainability, readability, and scalability of the code."
+llama3.1:8b,pipes/data-table/src/components/audio-transcriptions-table.tsx,90.44,6,1,1,1,2,1,0,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: [Long Method](https://refactoring.guru/smell/long-method)
+- Location: `AudioTranscriptionsTable` function
+- Explanation: This method is too long and complex, performing multiple tasks such as rendering the table, handling sorting, and displaying data.
+- Refactoring: Break down this method into smaller, more focused functions to improve maintainability.
+
+**2. Switch Statements with Many Cases:**
+- Smell Name: [Switch Statements with Many Cases](https://refactoring.guru/smell/switch-statements-with-many-cases)
+- Location: `CellContent` function (in the `onClick` event handler)
+- Explanation: The `onClick` event handler uses a switch statement to determine which action to perform, but it has many cases and is not easily extensible.
+- Refactoring: Consider using a more object-oriented approach or a mapping of actions to functions.
+
+**3. Duplicate Code:**
+- Smell Name: [Duplicate Code](https://refactoring.guru/smell/duplicate-code)
+- Location: `AudioTranscriptionsTable` function (in the sorting logic)
+- Explanation: The sorting logic is duplicated for each column, which can lead to maintenance issues if changes are needed.
+- Refactoring: Extract a separate function or utility to handle sorting and reuse it throughout the code.
+
+**4. Dead Code:**
+- Smell Name: [Dead Code](https://refactoring.guru/smell/dead-code)
+- Location: `CellContent` function (the `Dialog` component is not used when `isDialogOpen` is false)
+- Explanation: The `Dialog` component is only displayed when the user clicks on a cell, but it remains in memory even when closed.
+- Refactoring: Consider using a more efficient approach to display data or removing unused code.
+
+**5. Shotgun Surgery:**
+- Smell Name: [Shotgun Surgery](https://refactoring.guru/smell/shotgun-surgery)
+- Location: `AudioTranscriptionsTable` function (when adding new columns, the entire table component needs to be updated)
+- Explanation: The table component is tightly coupled with its data and rendering logic, making it difficult to add or remove features without affecting other parts of the code.
+- Refactoring: Consider using a more modular approach, separating concerns into smaller components or functions.
+
+**6. Feature Envy:**
+- Smell Name: [Feature Envy](https://refactoring.guru/smell/feature-envy)
+- Location: `AudioTranscriptionsTable` function (the sorting logic is performed in the table component, but it relies on external state and props)
+- Explanation: The table component is responsible for both rendering data and handling user interactions, which can lead to tight coupling.
+- Refactoring: Consider moving the sorting logic to a separate utility or service that can be reused throughout the application.
+
+These are just some of the Code Smells I found in the provided code. Addressing these issues will improve the maintainability, readability, and scalability of the codebase."
+llama3.1:8b,pipes/data-table/src/components/database-sidebar.tsx,15.32,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `DatabaseSidebar` function (entire function)
+- **Explanation:** The `DatabaseSidebar` function is performing multiple unrelated tasks: detecting the operating system, filtering tables based on OS, and rendering the sidebar. This violates the Single Responsibility Principle.
+- **Refactoring:** Break down the `DatabaseSidebar` function into smaller functions, each responsible for a single task (e.g., `detectOS`, `filterTables`, `renderSidebar`)."
+llama3.1:8b,pipes/data-table/src/components/markdown.tsx,15.15,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `MemoizedReactMarkdown` function (entire function)
+- **Explanation:** The `MemoizedReactMarkdown` function is doing two unrelated things: memoization and rendering of ReactMarkdown. This violates the Single Responsibility Principle, making it harder to understand and maintain.
+- **Refactoring:** Break down the `MemoizedReactMarkdown` function into separate functions for memoization and rendering, each with a single responsibility.
+
+✅ No other Code Smells detected."
+llama3.1:8b,pipes/data-table/src/components/ocr-data-table.tsx,113.26,10,5,1,1,2,1,0,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: [Long Method](https://refactoring.guru/smells/long-method)
+- Location: `CellContent` function
+- Explanation: The `CellContent` function is too long and complex, performing multiple unrelated tasks.
+- Refactoring: Break down the `CellContent` function into smaller, more focused functions.
+
+**2. Switch Statements:**
+- Smell Name: [Switch Statements](https://refactoring.guru/smells/switch-statements)
+- Location: `ColumnDef` objects (e.g., ""timestamp"", ""text"")
+- Explanation: The use of switch statements in the column definitions can be replaced with more expressive and maintainable code.
+- Refactoring: Replace switch statements with more explicit and type-safe code.
+
+**3. Duplicate Code:**
+- Smell Name: [Duplicate Code](https://refactoring.guru/smells/duplicate-code)
+- Location: `ColumnDef` objects (e.g., ""text"", ""window_name"")
+- Explanation: The column definitions for ""text"" and ""window_name"" have similar code.
+- Refactoring: Extract a separate function or utility to handle the common logic.
+
+**4. God Object:**
+- Smell Name: [God Object](https://refactoring.guru/smells/god-object)
+- Location: `OcrDataTable` component
+- Explanation: The `OcrDataTable` component is responsible for multiple unrelated tasks, such as rendering data and handling user interactions.
+- Refactoring: Break down the `OcrDataTable` component into smaller, more focused components.
+
+**5. Dead Code:**
+- Smell Name: [Dead Code](https://refactoring.guru/smells/dead-code)
+- Location: Unused imports (e.g., `AppWindow`, `ChevronLeft`)
+- Explanation: There are unused imports in the code.
+- Refactoring: Remove unused imports to declutter the code.
+
+**6. Long Class Name:**
+- Smell Name: [Long Class Name](https://refactoring.guru/smells/long-class-name)
+- Location: `OcrDataTable` component
+- Explanation: The class name is too long and descriptive.
+- Refactoring: Rename the class to a shorter, more concise name.
+
+**7. Long Variable Names:**
+- Smell Name: [Long Variable Names](https://refactoring.guru/smells/long-variable-names)
+- Location: `data` variable
+- Explanation: The variable name is too long and descriptive.
+- Refactoring: Rename the variable to a shorter, more concise name.
+
+**8. Complex Conditionals:**
+- Smell Name: [Complex Conditionals](https://refactoring.guru/smells/complex-conditionals)
+- Location: `CellContent` function
+- Explanation: The conditional logic in the `CellContent` function is complex and hard to read.
+- Refactoring: Simplify the conditionals using more explicit and type-safe code.
+
+**9. Shotgun Surgery:**
+- Smell Name: [Shotgun Surgery](https://refactoring.guru/smells/shotgun-surgery)
+- Location: Multiple places in the code
+- Explanation: The code has multiple unrelated changes, making it hard to maintain.
+- Refactoring: Extract separate functions or utilities for each task.
+
+**10. Feature Envy:**
+- Smell Name: [Feature Envy](https://refactoring.guru/smells/feature-envy)
+- Location: `OcrDataTable` component
+- Explanation: The component is too focused on a specific feature (data rendering) and lacks cohesion.
+- Refactoring: Break down the component into smaller, more focused components.
+
+Note that some of these Code Smells might be subjective or minor. However, they can still contribute to code maintainability and readability issues."
+llama3.1:8b,pipes/data-table/src/components/page.tsx,15.65,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `renderTable` function (lines 15-25)
+- **Explanation:** The `renderTable` function is too long and complex, performing multiple tasks such as conditional rendering of different components. This makes it difficult to understand and maintain.
+- **Refactoring:** Break down the `renderTable` function into smaller, more focused functions, each responsible for a specific task (e.g., one function for rendering the OcrDataTable, another for VideoChunksTable, etc.)."
+llama3.1:8b,pipes/data-table/src/components/search-command.tsx,67.84,12,6,2,0,2,0,2,"After analyzing the source code, I found several Code Smells:
+
+1. **Long Method**: [Smell Name: Long Method]
+	* Location: `handleGenerateSql` function (lines 123-173)
+	* Explanation: This method is too long and complex, performing multiple tasks such as API calls, error handling, and state updates.
+	* Refactoring: Break down the method into smaller, more focused functions to improve readability and maintainability.
+
+2. **God Object**: [Smell Name: God Object]
+	* Location: `SearchCommand` component (entire file)
+	* Explanation: The component is responsible for managing multiple states, handling keyboard shortcuts, and making API calls, making it a ""god object"" with too many responsibilities.
+	* Refactoring: Extract smaller components or functions to handle specific tasks, reducing the complexity of this component.
+
+3. **Switch Statements**: [Smell Name: Switch Statements]
+	* Location: `handleGenerateSql` function (lines 143-146)
+	* Explanation: The use of switch statements can lead to duplicated code and make it harder to maintain.
+	* Refactoring: Consider using polymorphism or a more robust way to handle different cases.
+
+4. **Long Parameter List**: [Smell Name: Long Parameter List]
+	* Location: `OpenAI` constructor (lines 157-160)
+	* Explanation: The constructor has too many parameters, making it harder to understand and maintain.
+	* Refactoring: Consider using a configuration object or breaking down the parameters into smaller, more focused functions.
+
+5. **Dead Code**: [Smell Name: Dead Code]
+	* Location: `useEffect` hook for OS detection (lines 21-23)
+	* Explanation: The code is not used anywhere in the component.
+	* Refactoring: Remove unused code to declutter the file and improve maintainability.
+
+6. **Complex Conditionals**: [Smell Name: Complex Conditionals]
+	* Location: `handleGenerateSql` function (lines 131-136)
+	* Explanation: The conditional statements are complex and hard to read.
+	* Refactoring: Simplify the conditionals by breaking them down into smaller, more focused functions or using a more readable syntax.
+
+These Code Smells can be addressed through refactoring, which will improve the maintainability, readability, and overall quality of the code."
+llama3.1:8b,pipes/data-table/src/components/sql-autocomplete-input.tsx,102.99,10,2,0,0,2,0,6,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: **Long Method**
+- Location: `SqlAutocompleteInput` function (entire file)
+- Explanation: This method is too long and complex, performing multiple unrelated tasks such as handling state updates, event listeners, and rendering UI components.
+- Refactoring: Break down the method into smaller, more focused functions to improve maintainability and readability.
+
+**2. God Object:**
+- Smell Name: **God Object**
+- Location: `SqlAutocompleteInput` function
+- Explanation: This component is responsible for handling multiple concerns such as state management, event listeners, and rendering UI components, making it a ""god object"" that knows too much.
+- Refactoring: Extract smaller, more focused components or functions to handle specific concerns.
+
+**3. Switch Statement with Many Cases:**
+- Smell Name: **Switch Statement with Many Cases**
+- Location: `handleSelect` function
+- Explanation: The `handleSelect` function has a long switch statement with many cases, making it hard to read and maintain.
+- Refactoring: Consider using a more robust data structure or a mapping function to simplify the logic.
+
+**4. Duplicate Code:**
+- Smell Name: **Duplicate Code**
+- Location: `useEffect` hook (two instances)
+- Explanation: The same code is duplicated in two separate `useEffect` hooks, making it harder to maintain.
+- Refactoring: Extract a reusable function or a utility method to avoid duplication.
+
+**5. Complex Conditionals:**
+- Smell Name: **Complex Conditionals**
+- Location: `handleInputChange` function
+- Explanation: The conditionals in the `handleInputChange` function are complex and hard to read.
+- Refactoring: Simplify the conditionals by breaking them down into smaller, more focused functions.
+
+**6. Tight Coupling:**
+- Smell Name: **Tight Coupling**
+- Location: `SqlAutocompleteInput` function (dependencies on external libraries)
+- Explanation: The component is tightly coupled to external libraries and dependencies, making it hard to change or replace them.
+- Refactoring: Consider using a more modular architecture with clear interfaces between components.
+
+**7. Dead Code:**
+- Smell Name: **Dead Code**
+- Location: `handleClearInput` function (not used)
+- Explanation: The `handleClearInput` function is not used anywhere in the code, making it dead code.
+- Refactoring: Remove unused functions or variables to improve maintainability.
+
+**8. Long Variable Names:**
+- Smell Name: **Long Variable Names**
+- Location: Various variable names (e.g., `inputValue`, `commandRef`)
+- Explanation: Some variable names are too long and descriptive, making the code harder to read.
+- Refactoring: Use shorter, more concise variable names that still convey their purpose.
+
+**9. Magic Numbers:**
+- Smell Name: **Magic Numbers**
+- Location: Various numeric values (e.g., `1/2`, `3`)
+- Explanation: The code contains magic numbers that are not clearly explained or justified.
+- Refactoring: Replace magic numbers with named constants or variables to improve readability.
+
+**10. Unnecessary Complexity:**
+- Smell Name: **Unnecessary Complexity**
+- Location: Various parts of the code (e.g., nested conditionals, complex event listeners)
+- Explanation: The code contains unnecessary complexity that makes it harder to understand and maintain.
+- Refactoring: Simplify the logic by breaking down complex tasks into smaller, more manageable pieces.
+
+Note that some of these Code Smells may be subjective or dependent on personal preferences. However, they are all recognized patterns in the Refactoring Guru catalog that can improve code quality and maintainability."
+llama3.1:8b,pipes/data-table/src/components/video-chunks-table.tsx,86.06,16,4,2,0,2,2,6,"After analyzing the source code, I found several Code Smells:
+
+1. **Long Method**: [Smell Name: Long Method]
+	* Location: `VideoChunksTable` function
+	* Explanation: This method has a large number of lines (around 100) and performs multiple tasks, including handling state, fetching data, and rendering the table.
+	* Refactoring: Break down this method into smaller, more focused functions to improve maintainability and readability.
+
+2. **Switch Statements**: [Smell Name: Switch Statements]
+	* Location: `fetchData` function
+	* Explanation: The code uses a switch statement with multiple cases to construct a SQL query based on filter conditions.
+	* Refactoring: Use a more declarative approach, such as using an object or a function to generate the SQL query.
+
+3. **Complex Conditional Expressions**: [Smell Name: Complex Conditional Expressions]
+	* Location: `fetchData` function
+	* Explanation: The code uses complex conditional expressions to construct filter clauses and where clause.
+	* Refactoring: Simplify these expressions by breaking them down into smaller, more manageable parts.
+
+4. **Dead Code**: [Smell Name: Dead Code]
+	* Location: `CellContent` component (unused variables)
+	* Explanation: The code has unused variables (`className`) in the `CellContent` component.
+	* Refactoring: Remove these unused variables to declutter the code and improve maintainability.
+
+5. **God Object**: [Smell Name: God Object]
+	* Location: `VideoChunksTable` function
+	* Explanation: This function handles multiple responsibilities, including state management, data fetching, and rendering.
+	* Refactoring: Break down this object into smaller, more focused components to improve maintainability and scalability.
+
+6. **Magic Numbers**: [Smell Name: Magic Numbers]
+	* Location: `VideoChunksTable` function (hardcoded values)
+	* Explanation: The code uses hardcoded values for page size and other constants.
+	* Refactoring: Define these values as named constants or configurable variables to improve readability and maintainability.
+
+7. **Long Class**: [Smell Name: Long Class]
+	* Location: `VideoChunksTable` function
+	* Explanation: This component has a large number of state variables, which can make it difficult to manage and understand.
+	* Refactoring: Break down this class into smaller, more focused components to improve maintainability and scalability.
+
+8. **Feature Envy**: [Smell Name: Feature Envy]
+	* Location: `VideoChunksTable` function (using external functions)
+	* Explanation: The code uses external functions (`fetchData`) that are not part of the component's own logic.
+	* Refactoring: Move these functions into the component itself or create a separate module for them to improve maintainability and reusability.
+
+These Code Smells can be addressed by applying various refactoring techniques, such as breaking down long methods, simplifying complex conditional expressions, removing dead code, and improving class design."
+llama3.1:8b,pipes/data-table/src/lib/actions/get-screenpipe-app-settings.ts,18.5,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `getScreenpipeAppSettings` and `updateScreenpipeAppSettings` functions (lines 5-8)
+- **Explanation:** These functions are doing too much work. They're not only responsible for the business logic but also for calling external dependencies (`pipe.settings.getAll()` and `pipe.settings.update()`) which makes them tightly coupled.
+- **Refactoring:** Break down these methods into smaller, more focused ones that handle specific responsibilities. For example, create separate functions to call the external dependencies and then use those in the main functions.
+
+✅ No other Code Smells detected."
+llama3.1:8b,pipes/data-table/src/lib/actions/video-actions.ts,16.43,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `getMediaFile` function (entire function)
+- **Explanation:** The `getMediaFile` function is doing too many things: reading a file, converting it to base64, determining the MIME type, and handling errors. This violates the Single Responsibility Principle.
+- **Refactoring:** Break down the `getMediaFile` function into smaller functions, each with its own responsibility (e.g., `readFile`, `convertToBase64`, `determineMimeType`, and `handleError`)."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-copy-to-clipboard.tsx,14.94,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `useCopyToClipboard` function (entire function)
+- **Explanation:** The `useCopyToClipboard` function has multiple responsibilities: it manages state (`isCopied`), performs clipboard operations, and handles timeouts. This violates the Single Responsibility Principle.
+- **Refactoring:** Break down the `useCopyToClipboard` function into smaller functions, each responsible for a single task (e.g., `handleClipboardOperation`, `manageState`, etc.)."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-debounce.tsx,17.81,1,0,0,0,1,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Dead Code
+- **Location:** `useDebounce` function (lines 5-14)
+- **Explanation:** The `debouncedValue` state is initialized with the `value` parameter, but it's not necessary because the initial value of the state will be updated immediately in the `useEffect` hook. This makes the initialization unnecessary and potentially confusing.
+- **Refactoring:** Remove the unnecessary initialization: `const [debouncedValue, setDebouncedValue] = useState<T>(value);` can become `const [debouncedValue, setDebouncedValue] = useState<T>();`."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-health-check.tsx,108.54,10,1,0,0,2,0,7,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: **Long Method**
+- Location: `useHealthCheck` function
+- Explanation: The `useHealthCheck` function is too long and complex, performing multiple tasks such as fetching health data, handling errors, and debouncing the fetch request.
+- Refactoring: Break down the `useHealthCheck` function into smaller, more focused functions to improve readability and maintainability.
+
+**2. Switch Statement with Many Branches:**
+- Smell Name: **Switch Statement with Many Branches**
+- Location: `isHealthChanged` function
+- Explanation: The `isHealthChanged` function uses a long chain of OR operators to compare the old and new health objects, making it hard to read and maintain.
+- Refactoring: Use a more robust comparison method or consider using a library like Lodash for deep object comparisons.
+
+**3. Duplicate Code:**
+- Smell Name: **Duplicate Code**
+- Location: `fetchHealth` function (multiple places)
+- Explanation: The `fetchHealth` function has duplicate code blocks, such as the error handling and abort controller logic.
+- Refactoring: Extract a separate function for the common logic to avoid duplication.
+
+**4. Complex Conditionals:**
+- Smell Name: **Complex Conditionals**
+- Location: `useEffect` hook
+- Explanation: The `useEffect` hook has complex conditionals that make it hard to understand and predict its behavior.
+- Refactoring: Simplify the conditionals by breaking them down into smaller, more focused checks.
+
+**5. Tight Coupling:**
+- Smell Name: **Tight Coupling**
+- Location: `useHealthCheck` function (dependency on `fetch` API)
+- Explanation: The `useHealthCheck` function is tightly coupled to the `fetch` API, making it hard to change or replace without affecting other parts of the code.
+- Refactoring: Consider using a more abstract interface for fetching data or injecting dependencies through props.
+
+**6. Dead Code:**
+- Smell Name: **Dead Code**
+- Location: `console.error` statement
+- Explanation: The `console.error` statement is commented out, making it dead code that can be removed.
+- Refactoring: Remove the commented-out code to keep the codebase clean and maintainable.
+
+**7. Function with Too Many Parameters:**
+- Smell Name: **Function with Too Many Parameters**
+- Location: `useHealthCheck` function
+- Explanation: The `useHealthCheck` function has many parameters, making it hard to understand its purpose and behavior.
+- Refactoring: Consider using a more object-oriented approach or breaking down the function into smaller, more focused functions.
+
+**8. Magic Numbers:**
+- Smell Name: **Magic Numbers**
+- Location: `debounce` function (200ms delay)
+- Explanation: The 200ms delay in the `debounce` function is a magic number that can be hard to understand and maintain.
+- Refactoring: Consider defining named constants for such values or using a more configurable approach.
+
+**9. Unnecessary Complexity:**
+- Smell Name: **Unnecessary Complexity**
+- Location: `useHealthCheck` function (multiple nested functions)
+- Explanation: The `useHealthCheck` function has unnecessary complexity due to multiple nested functions, making it hard to read and maintain.
+- Refactoring: Simplify the function structure by removing unnecessary nesting or breaking down complex logic into smaller functions.
+
+**10. Unnecessary Use of Higher-Order Functions:**
+- Smell Name: **Unnecessary Use of Higher-Order Functions**
+- Location: `useHealthCheck` function (use of `useCallback`)
+- Explanation: The use of `useCallback` in the `useHealthCheck` function is unnecessary, as it can be replaced with a simpler approach.
+- Refactoring: Consider removing or simplifying the use of higher-order functions to improve readability and maintainability.
+
+These Code Smells can be addressed by applying refactoring techniques such as breaking down complex logic, simplifying conditionals, and improving code structure."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-pipe-settings.tsx,27.28,2,2,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `usePipeSettings` function (entire function)
+- **Explanation:** The `usePipeSettings` function is doing too many things: it's managing state, loading settings, subscribing to changes, and providing multiple functions. This violates the Single Responsibility Principle.
+- **Refactoring:** Break down the `usePipeSettings` function into smaller, more focused functions, each with a single responsibility.
+
+Additionally, I found another Code Smell:
+
+- **Smell Name:** God Object
+- **Location:** `usePipeSettings` function (entire function)
+- **Explanation:** The `usePipeSettings` function is acting as a container for multiple unrelated functions (`updateSettings`, `getPreset`, etc.). This violates the Single Responsibility Principle and makes it harder to understand and maintain.
+- **Refactoring:** Extract each of these functions into their own separate modules or functions, making them more focused and easier to understand.
+
+Let me know if you'd like me to elaborate on these suggestions!"
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-search-history.tsx,28.22,2,2,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `useSearchHistory` function (entire function)
+- **Explanation:** The `useSearchHistory` function is performing multiple unrelated tasks: loading and saving search history, adding new searches, updating AI responses, deleting searches, and toggling collapse. This violates the Single Responsibility Principle.
+- **Refactoring:** Break down the `useSearchHistory` function into smaller, more focused functions, each responsible for a single task.
+
+Additionally, I found another Code Smell:
+
+- **Smell Name:** God Object
+- **Location:** `useSearchHistory` function (entire function)
+- **Explanation:** The `useSearchHistory` function is returning an object with multiple unrelated properties and methods. This violates the Single Responsibility Principle.
+- **Refactoring:** Extract a separate component or module for managing search history, and have it handle all related logic.
+
+No other Code Smells were detected."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-settings.tsx,51.61,4,2,1,0,1,0,0,"After analyzing the source code, I found several Code Smells:
+
+**1. God Object: SettingsStore**
+- Location: `SettingsStore` class
+- Explanation: The `SettingsStore` class has multiple responsibilities, including storing settings, loading settings, updating settings, and notifying listeners. This violates the Single Responsibility Principle (SRP).
+- Refactoring: Break down the `SettingsStore` class into smaller classes or modules, each responsible for a single task.
+
+**2. Long Method: loadGlobalSettings**
+- Location: `loadGlobalSettings` method in `SettingsStore`
+- Explanation: The `loadGlobalSettings` method is too long and complex, performing multiple tasks such as loading settings, updating the store, and notifying listeners.
+- Refactoring: Break down the `loadGlobalSettings` method into smaller methods, each responsible for a single task.
+
+**3. Long Method: updatePipeSettings**
+- Location: `updatePipeSettings` method in `SettingsStore`
+- Explanation: The `updatePipeSettings` method is too long and complex, performing multiple tasks such as updating settings, updating the store, and notifying listeners.
+- Refactoring: Break down the `updatePipeSettings` method into smaller methods, each responsible for a single task.
+
+**4. Switch Statement with Many Cases**
+- Location: `getPreset` method in `SettingsStore`
+- Explanation: The `getPreset` method has multiple switch cases, which can be complex and hard to maintain.
+- Refactoring: Use polymorphism or object-oriented principles to simplify the `getPreset` method.
+
+**5. Duplicate Code**
+- Location: Multiple methods in `SettingsStore` class
+- Explanation: Some code is duplicated across multiple methods, such as error handling and logging.
+- Refactoring: Extract common logic into separate methods or functions to avoid duplication.
+
+No other Code Smells were detected."
+llama3.1:8b,pipes/data-table/src/lib/hooks/use-sql-autocomplete.tsx,15.83,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `fetchItems` function (lines 17-43)
+- **Explanation:** The `fetchItems` function is doing too many things: it's handling caching, making a database query, and updating the UI. This makes the code hard to read and understand.
+- **Refactoring:** Break down the `fetchItems` function into smaller functions, each with a single responsibility (e.g., `handleCaching`, `makeDatabaseQuery`, `updateUI`)."
+llama3.1:8b,pipes/data-table/src/lib/types.ts,14.13,1,1,0,0,0,0,0,"After analyzing the source code, I found one Code Smell:
+
+- **Smell Name:** Long Parameter List
+- **Location:** `Settings` interface (line 15)
+- **Explanation:** The `Settings` interface has a long list of properties, which can make it difficult to understand and maintain. This is a sign that the class might be doing too much.
+- **Refactoring:** Consider breaking down the `Settings` interface into smaller interfaces or classes, each with its own set of related properties.
+
+No other Code Smells were found in this code snippet."
+llama3.1:8b,pipes/data-table/src/lib/utils.ts,17.42,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `removeDuplicateSelections` function (entire function)
+- **Explanation:** The `removeDuplicateSelections` function is too long and complex, performing multiple tasks such as iterating over an array, checking for duplicates, and updating a set. This makes it difficult to understand and maintain.
+- **Refactoring:** Break down the function into smaller, more focused functions, each with a single responsibility (e.g., `isDuplicate`, `getSimilarity`, etc.). This will improve readability and maintainability.
+
+Let me know if you'd like me to investigate further!"
+llama3.1:8b,pipes/data-table/tailwind.config.ts,29.61,2,1,1,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** The `theme` object has a large number of nested properties and values, making it difficult to read and understand.
+- **Explanation:** This violates clean code principles because long methods (or in this case, objects) can be hard to maintain, debug, and modify. They often perform multiple unrelated tasks, leading to complexity and fragility.
+- **Refactoring:** Break down the `theme` object into smaller, more focused objects or functions, each with a single responsibility.
+
+Additionally, I found another Code Smell:
+
+- **Smell Name:** Switch Statements
+- **Location:** The `colors` property has multiple nested switch-like statements (e.g., `card`, `popover`, etc.).
+- **Explanation:** This violates clean code principles because switch statements can become complex and hard to read when they have many cases.
+- **Refactoring:** Use a more declarative approach, such as using an object with key-value pairs or a function that returns the desired color value.
+
+No other Code Smells were detected."
+llama3.1:8b,pipes/desktop-to-table/app/api/click-by-index/route.ts,19.86,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `export async function POST(request: Request) { ... }`
+- **Explanation:** This method is doing too many things: parsing JSON body, checking for errors, calling an external library (`browserPipe`), and handling exceptions. It's a good practice to break down complex methods into smaller, more manageable ones.
+- **Refactoring:** Extract separate functions for each responsibility (e.g., `parseRequestBody`, `validateIndex`, `callBrowserPipe`, etc.). This will improve code readability and maintainability.
+
+Let me know if you'd like me to investigate further!"
+llama3.1:8b,pipes/desktop-to-table/app/api/component-source/route.ts,17.67,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `GET` function (entire function)
+- **Explanation:** The `GET` function is too long and complex, performing multiple tasks such as path normalization, file access checking, reading the file, and returning the content. This makes it difficult to understand, test, and maintain.
+- **Refactoring:** Break down the `GET` function into smaller, more focused functions, each responsible for a specific task (e.g., `normalizePath`, `checkFileAccess`, `readFileContent`)."
+llama3.1:8b,pipes/desktop-to-table/app/api/fetch-external/route.ts,16.46,1,1,0,0,0,0,0,"After analyzing the source code, I found the following Code Smell:
+
+- **Smell Name:** Long Method
+- **Location:** `GET` function (entire function)
+- **Explanation:** The `GET` function is performing multiple tasks: validating URL parameters, fetching content from external URLs, handling errors, and returning responses. This violates the Single Responsibility Principle, making it difficult to understand, test, and maintain.
+- **Refactoring:** Break down the `GET` function into smaller functions, each responsible for a specific task (e.g., `validateUrl`, `fetchContent`, `handleError`)."
+llama3.1:8b,pipes/desktop-to-table/app/api/get-interactive-list/route.ts,76.85,8,1,1,0,3,0,3,"After analyzing the source code, I found several Code Smells:
+
+**1. Long Method:**
+- Smell Name: **Long Method**
+- Location: `GET` function (entire function)
+- Explanation: The `GET` function is too long and complex, performing multiple tasks such as input validation, parameter processing, error handling, and response formatting.
+- Refactoring: Break down the `GET` function into smaller, more focused functions to improve maintainability and readability.
+
+**2. Switch Statements with Many Cases:**
+- Smell Name: **Switch Statements with Many Cases**
+- Location: `if (!app)` block (not exactly a switch statement, but similar)
+- Explanation: The code uses multiple `if` statements to check for boolean parameters, which can be replaced with a more concise and expressive approach.
+- Refactoring: Consider using an object or a function to handle the boolean parameter conversions.
+
+**3. Duplicate Code:**
+- Smell Name: **Duplicate Code**
+- Location: Error handling blocks (multiple occurrences)
+- Explanation: The error handling code is duplicated in multiple places, which can lead to maintenance issues if changes are needed.
+- Refactoring: Extract a separate function for error handling to avoid duplication.
+
+**4. Complex Conditional Expressions:**
+- Smell Name: **Complex Conditional Expressions**
+- Location: `withTextOnly` and other boolean parameter conversions
+- Explanation: The code uses complex conditional expressions to convert string parameters to booleans, which can be hard to read and understand.
+- Refactoring: Simplify the conditional expressions using a more straightforward approach.
+
+**5. Magic Numbers:**
+- Smell Name: **Magic Numbers**
+- Location: `parseInt` calls (e.g., `""10""` as a magic number)
+- Explanation: The code uses hardcoded numbers without explanation, which can make it harder to understand and maintain.
+- Refactoring: Replace magic numbers with named constants or enums.
+
+**6. Long Variable Names:**
+- Smell Name: **Long Variable Names**
+- Location: `result` variable (not exactly long, but could be improved)
+- Explanation: Some variable names are quite long and descriptive, which can make the code harder to read.
+- Refactoring: Consider using more concise variable names while maintaining clarity.
+
+**7. Unnecessary Comments:**
+- Smell Name: **Unnecessary Comments**
+- Location: Multiple comments (e.g., `// Get query parameters`)
+- Explanation: Some comments are not necessary or are too obvious, which can clutter the code.
+- Refactoring: Remove unnecessary comments to improve readability and maintainability.
+
+**8. Dead Code:**
+- Smell Name: **Dead Code**
+- Location: Unused variables and functions (not found in this specific code)
+- Explanation: The code may contain unused variables or functions that are no longer needed.
+- Refactoring: Remove dead code to simplify the codebase.
+
+Note: These suggestions are based on the Refactoring Guru catalog of Code Smells."
+,,,114,,,,,,,
