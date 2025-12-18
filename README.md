@@ -18,7 +18,7 @@ Siga estas etapas para configurar o ambiente e executar a auditoria.
 **Nota Importante:** A estrutura de pastas esperada é que o script principal esteja dentro de `src/`. Todos os comandos abaixo devem ser executados **de dentro da pasta `src`**.
 
 ```text
-Evolucao_Software_2025-2_screenpipe/
+Evolucao_Software_2025-2_screenpipe_atividade2/
 ├── src/            <-- 📂 Você deve estar aqui
 │   ├── resultados_corrigidos/
 │   ├── analise_smells.py
